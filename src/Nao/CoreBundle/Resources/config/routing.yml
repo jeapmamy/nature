@@ -1,3 +1,0 @@
-nao_core_index:
-    path:     /
-    defaults: { _controller: NaoCoreBundle:Front:index }

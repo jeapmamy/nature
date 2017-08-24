@@ -1,0 +1,37 @@
+{# src/CoreBundle/Resources/views/layout.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	{# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+	<div>
+		<h1>Layout du CoreBundle</h1>
+		<p>
+			(src/CoreBundle/Resources/views/layout.html.twig)			
+		</p>
+		<h2>
+			La barre de menu et le pied de page sont déterminés dans le layout principal :
+		</h2>
+		<p>
+			(app/Resources/views/layout.html.twig)
+		</p>
+	</div>
+
+	<hr>
+	
+
+	{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+	{% block core_body %}
+
+		{% block fos_user_content %}
+		{#ici le block utilisé par les différents template du FOSUserBundle#}
+		{% endblock fos_user_content %}
+
+	{% endblock %}
+
+{% endblock %}
