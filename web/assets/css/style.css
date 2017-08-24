@@ -1,5 +1,5 @@
 body, html{
-	height: 100%;
+	height: auto;
 }
 header {
 	margin-bottom: 50px;
@@ -10,12 +10,58 @@ div {
 }
 */
 
+/* Form Login
+ ------------ */
+
+
+.form-box {
+	margin-top: 30px;
+	margin-bottom: 80px;
+}
+
+.form-top {
+	overflow: hidden;
+	padding: 0 25px 15px 25px;
+	background: #f3f3f3;
+	/*
+	-moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+	text-align: left;
+	*/
+}
+
+.form-top-left {
+	float: left;
+	width: 75%;
+	padding-top: 25px;
+}
+
+.form-top-left h3 { margin-top: 0; }
+
+.form-top-right {
+	float: left;
+	width: 25%;
+	padding-top: 5px;
+	font-size: 66px;
+	color: #ddd;
+	line-height: 100px;
+	text-align: right;
+}
+
+.form-bottom {
+	padding: 25px 25px 30px 25px;
+	background: #eee;
+	/*
+	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+	text-align: left;
+	*/
+}
+
 /* Footer
  -------- */
 
-footer{
+footer {
 	background: #ccc;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	padding-top: 10px;
