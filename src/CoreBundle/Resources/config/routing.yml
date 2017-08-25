@@ -1,3 +1,10 @@
 core_index:
     path:     /
     defaults: { _controller: CoreBundle:Front:index }
+
+
+core_ajaxnature:
+    path:     /ajaxnature
+    defaults: { _controller: CoreBundle:Front:ajaxnature }
+    requirements:
+      _method: POST
