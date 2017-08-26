@@ -11,8 +11,6 @@
 
 	{% block stylesheets %} {# On charge le CSS de bootstrap depuis le site directement #}
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="http://localhost/p5_Nao/nature/web/assets/css/style.css">
 	{% endblock %}
 </head>
@@ -57,7 +55,17 @@
 		<div id="content" class="container">
 			{% block body %} {% endblock %}
 		</div>
+<div>
+ {{
+  form_row(form.nomVern, {
+    'attr': {
+      'data-id': 'dallalien',
+      'data-url': path('core_ajaxnature')
+    }
+  })
+}}
 
+</div>
 
 		<!-- Pied de Page
 		================================================== -->
@@ -75,7 +83,42 @@
 	{% block javascripts %} {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	{% endblock %}
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+
+
+
+
+
+
+<script>  
+$("input[data-id=dallalien]").autocomplete({
+    source: function (request, response) {
+         var company = $("input[data-id=dallalien]").val();
+         var objData = 'company=' + company;
+         var url = $(this.element).attr('data-url');
+           
+            $.ajax({
+                url: url,
+                dataType: "json",
+                data : objData,
+                type: 'POST',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return item;
+                    }));
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+    }
+})
+    </script>
+
+
+{% endblock %}
 
 </body>
 

@@ -3,7 +3,9 @@
 namespace CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use CoreBundle\Entity\Espece;
 use Symfony\Component\HttpFoundation\Request;
+use CoreBundle\Form\EspeceType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\EntityRepository;
@@ -12,30 +14,26 @@ class FrontController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CoreBundle:Front:index.html.twig');
+        $Espece = new Espece();
+        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+        return $this->render('CoreBundle:Front:index.html.twig',
+            array(
+           'form' => $form->createView(),
+           ));
     }
 
     public function ajaxnatureAction(Request $request)
-    {
-       //$request = $this->get('request');
-        $response = new Response;
-         
+    {   
         if($request->isXmlHttpRequest())
         {
-            $term = $this->get('motcle');
+            $company = $request->request->get('company');
+            $em = $this->getDoctrine()->getManager(); 
+            $dalaliens = $em->getRepository('CoreBundle:Espece')->listeNature($company); 
              
-            $array= $this->getDoctrine()
-                ->getManager()
-                ->getRepository('CoreBundle:Espece')
-                ->listeNature($term);
+            $response = new Response(json_encode($dalaliens));
              
-            $response = new Response(json_encode($array));
-             
-            $response->headers->set('Content-Type', 'application/json');
+            $response -> headers -> set('Content-Type', 'application/json');
             return $response;      
-        }
-        else {
-            return $this->render('CoreBundle:Front:testAUto.html.twig');
         }
     }
 }
