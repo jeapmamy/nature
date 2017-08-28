@@ -11,7 +11,7 @@ class EspeceRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c');
          
-        $qb ->select('c.nomVern, c.lbAuteur')
+        $qb ->select('c')
             
             ->where('c.nomVern LIKE :company')
             ->setParameter('company', '%'.$company.'%');
@@ -24,10 +24,19 @@ class EspeceRepository extends EntityRepository
 
         foreach($arrayAss as $data)
         {
-            $data = $data['nomVern'] .", ". $data['lbAuteur'];
+            //$data = $data['nomVern'] .", ". $data['lbAuteur'];
             $array[] = $data;
         }
      
         return $array;
+    }
+
+    public function searchBird($id){
+        $select =  $this->createQueryBuilder('a')
+         ->select ('a')
+         ->where('a.id = :id')->setParameter('id', $id)
+         ->getQuery()
+         ->getScalarResult();
+       return $select;
     }
 }

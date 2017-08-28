@@ -12,15 +12,30 @@ use Doctrine\ORM\EntityRepository;
 
 class FrontController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $Espece = new Espece();
         $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+
         return $this->render('CoreBundle:Front:index.html.twig',
             array(
            'form' => $form->createView(),
-           ));
+           )
+        );
     }
+
+    public function searchEspeceAction(Request $request)
+    {
+        $Espece = new Espece();
+        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+
+        return $this->render('CoreBundle:Front:recherche.html.twig',
+            array(
+           'form' => $form->createView(),
+           )
+        );
+    }
+
 
     public function ajaxnatureAction(Request $request)
     {   
@@ -35,5 +50,30 @@ class FrontController extends Controller
             $response -> headers -> set('Content-Type', 'application/json');
             return $response;      
         }
+    }
+
+    //controlleur getBird pour la fiche espece en parametre un id
+    //$.post('..')
+    public function searchFicheEspeceAction(Request $request, $id)
+    {   
+        $Espece = new Espece();
+        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+        if($request->isXmlHttpRequest())
+        {
+
+            //$company = $request->request->get('company');
+            $em = $this->getDoctrine()->getManager(); 
+            $dalaliens = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
+             
+            $response = new Response(json_encode($dalaliens));
+             
+            $response -> headers -> set('Content-Type', 'application/json');
+            return $response;      
+        }
+                return $this->render('CoreBundle:Front:recherche.html.twig',
+                    array(
+                   'form' => $form->createView(),
+                   )
+                );
     }
 }

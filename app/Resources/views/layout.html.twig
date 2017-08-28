@@ -37,7 +37,7 @@
 							<li class="hidden">
 								<a href="index.php"></a>
 							</li>
-							<li><a href="#">Recherche</a></li>
+							<li><a href="{{ path("core_searchEspece") }}">Recherche</a></li>
 							<li><a href="#">Observation</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -53,73 +53,72 @@
 		================================================== -->
 
 		<div id="content" class="container">
-			{% block body %} {% endblock %}
+			<div class="col-md-12">
+				{% block body %} {% endblock %}
+			</div>
 		</div>
-<div class="ui-widget">
- {{
-  form_row(form.nomVern, {
-    'attr': {
-      'data-id': 'dallalien',
-      'data-url': path('core_ajaxnature')
-    }
-  })
-}}
-
-</div>
-
-		<!-- Pied de Page
-		================================================== -->
-		<footer id="piedBlog">
-			
-					NAO © {{ 'now'|date('Y') }} |
-					<a href="#"> Mentions légales</a> |
-					<a href="#"> Contact</a>
-
-		</footer>
-
-		
 	</div>
 
-	{% block javascripts %} {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+
+
+	<!-- Pied de Page
+	================================================== -->
+	<footer id="piedBlog">
+		
+		NAO © {{ 'now'|date('Y') }} |
+		<a href="#"> Mentions légales</a> |
+		<a href="#"> Contact</a>
+
+	</footer>
 
 
 
+	{% block javascripts %} 
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			
+		<script>  
+			$("input[data-id=dallalien]").autocomplete({
+			    source: function (request, response) {
+					var company = $("input[data-id=dallalien]").val();
+					var objData = 'company=' + company;
+					var url = $(this.element).attr('data-url');
+			           
+		            $.ajax({
+		                url: url,
+		                dataType: "json",
+		                data : objData,
+		                type: 'POST',
+		                success: function (data) {
+		                    response($.map(data, function (item) {
+		                        return {
+		                        label: item.nomVern + ', ' + item.lbAuteur,
+		                        value: item.id
+		                        }
+		                    }));
+		                },
+		                error: function (jqXHR, textStatus, errorThrown) {
+		                    console.log(textStatus, errorThrown);
+		                }
+		            });
+			    }
+			})
+			$("input[data-id=dallalien]").on('autocompleteselect',function(event, ui) {
+				event.preventDefault();
+				var contact = ui.item.label;
+					id = ui.item.value;
+			    	console.log('Event: ', event);
+			    	console.log('UI :', ui.item);
+			    	$(event.currentTarget).val(contact);
+			})
+			$.post('http://localhost/p5_nao/nature/web/app_dev.php/', {'id': id}, function(response){
 
-
-
-<script>  
-$("input[data-id=dallalien]").autocomplete({
-    source: function (request, response) {
-         var company = $("input[data-id=dallalien]").val();
-         var objData = 'company=' + company;
-         var url = $(this.element).attr('data-url');
-           
-            $.ajax({
-                url: url,
-                dataType: "json",
-                data : objData,
-                type: 'POST',
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return item;
-                    }));
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
-    }
-})
-    </script>
-
-
-{% endblock %}
+			})
+		</script>
+	{% endblock %}
 
 </body>
 
