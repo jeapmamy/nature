@@ -10,8 +10,10 @@
 	<title>{% block title %}NAO{% endblock %}</title>
 
 	{% block stylesheets %} {# On charge le CSS de bootstrap depuis le site directement #}
+
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="http://localhost/nature/web/assets/css/style.css">
+
 	{% endblock %}
 </head>
 
@@ -39,7 +41,7 @@
 							<li class="hidden">
 								<a href="{{ path('core_index') }}"></a>
 							</li>
-							<li><a href="#">Recherche</a></li>
+							<li><a href="{{ path("core_searchEspece") }}">Recherche</a></li>
 							<li><a href="#">Observation</a></li>
 							<li><a href="#">Association</a></li>
 							<li>
@@ -74,8 +76,11 @@
 		{% endif %}
 
 		<div id="content" class="container">
-			{% block body %} {% endblock %}
+			<div class="col-md-12">
+				{% block body %} {% endblock %}
+			</div>
 		</div>
+	</div>
 
 
 		<!-- Pied de Page
@@ -88,12 +93,53 @@
 			</div>
 		</footer>
 
-		
-	</div>
 
-	{% block javascripts %} {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	{% block javascripts %} 
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			
+		<script>  
+			$("input[data-id=dallalien]").autocomplete({
+			    source: function (request, response) {
+					var company = $("input[data-id=dallalien]").val();
+					var objData = 'company=' + company;
+					var url = $(this.element).attr('data-url');
+			           
+		            $.ajax({
+		                url: url,
+		                dataType: "json",
+		                data : objData,
+		                type: 'POST',
+		                success: function (data) {
+		                    response($.map(data, function (item) {
+		                        return {
+		                        label: item.nomVern + ', ' + item.lbAuteur,
+		                        value: item.id
+		                        }
+		                    }));
+		                },
+		                error: function (jqXHR, textStatus, errorThrown) {
+		                    console.log(textStatus, errorThrown);
+		                }
+		            });
+			    }
+			})
+			$("input[data-id=dallalien]").on('autocompleteselect',function(event, ui) {
+				event.preventDefault();
+				var contact = ui.item.label;
+					id = ui.item.value;
+			    	console.log('Event: ', event);
+			    	console.log('UI :', ui.item);
+			    	$(event.currentTarget).val(contact);
+			})
+			$.post('http://localhost/nature/web/app_dev.php/', {'id': id}, function(response){
+
+			})
+		</script>
 	{% endblock %}
 
 </body>
