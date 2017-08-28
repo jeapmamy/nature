@@ -40,7 +40,7 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - 'bootstrap_3_horizontal_layout.html.twig'
-        - 'bootstrap_3_layout.html.twig'
+
 
 # Doctrine Configuration
 doctrine:
@@ -77,5 +77,5 @@ fos_user:
     firewall_name: main
     user_class: CoreBundle\Entity\User
     from_email:
-        address: webmaster@example.com
+        address: jeap.mamy@gmail.com
         sender_name: webmaster

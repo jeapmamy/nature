@@ -2,7 +2,6 @@ core_index:
     path:     /
     defaults: { _controller: CoreBundle:Front:index }
 
-
 core_ajaxnature:
     path:     /ajaxnature
     defaults: { _controller: CoreBundle:Front:ajaxnature }
@@ -16,3 +15,8 @@ core_searchEspece:
 core_searchFicheEspece:
     path:     /rechercher/{id}
     defaults: { _controller: CoreBundle:Front:searchFicheEspece }
+
+core_admin:
+    path:     /admin
+    defaults: { _controller: CoreBundle:Front:admin }
+
