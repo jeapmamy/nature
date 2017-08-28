@@ -1,0 +1,27 @@
+{# src/CoreBundle/Resources/views/Front/recherche.html.twig #}
+
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}
+	Faire une recherche - {{ parent() }}
+{% endblock %}
+
+{% block core_body %}
+<div class="well">
+	<h2>Cherchez par espèce</h2>
+
+		{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+		  	{{ form_label(form.nomVern, "Nom de l'espèce") }}
+		 	{{ form_widget(form.nomVern, {
+				'attr': {
+				   	'data-id': 'dallalien',
+				   	'data-url': path('core_ajaxnature')
+				   	}
+		  		})
+			}}
+
+		{{ form_end(form) }}
+
+</div>
+{% endblock %}
+

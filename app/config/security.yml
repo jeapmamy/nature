@@ -5,6 +5,10 @@ security:
     encoders:
         CoreBundle\Entity\User: sha512
 
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         main:
@@ -28,3 +32,9 @@ security:
                 target:     fos_user_security_login
             remember_me:
                 secret:     %secret%
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
