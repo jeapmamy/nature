@@ -16,7 +16,22 @@ core_searchFicheEspece:
     path:     /rechercher/{id}
     defaults: { _controller: CoreBundle:Front:searchFicheEspece }
 
+core_observation:
+    path:     /observation
+    defaults: { _controller: CoreBundle:Front:observation }
+
+core_association:
+    path:     /association
+    defaults: { _controller: CoreBundle:Front:association }
+
+core_mentions_legales:
+    path:     /mentions_legales
+    defaults: { _controller: CoreBundle:Front:mentionsLegales }
+
+core_contact:
+    path:     /contact
+    defaults: { _controller: CoreBundle:Front:contact }
+
 core_admin:
     path:     /admin
-    defaults: { _controller: CoreBundle:Front:admin }
-
+    defaults: { _controller: CoreBundle:Back:admin }

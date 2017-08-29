@@ -1,5 +1,14 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
+{% block title %}
+	Connexion - {{ parent() }}
+{% endblock %}
+
+
+{% block titlepage %}
+	<h2 style="text-align: center;">Connexion</h2>
+{% endblock %}
+
 {% block fos_user_content %}
     {{ include('@FOSUser/Security/login_content.html.twig') }}
 {% endblock fos_user_content %}
