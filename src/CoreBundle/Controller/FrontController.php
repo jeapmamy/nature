@@ -74,6 +74,18 @@ class FrontController extends Controller
                 );
     }
 	
+	//Page Observation
+    public function observationAction()
+    {
+        return $this->render('CoreBundle:Front:observation.html.twig');
+    }
+	
+	//Page Association
+    public function associationAction()
+    {
+        return $this->render('CoreBundle:Front:association.html.twig');
+    }
+		
     /**
      *@Security("has_role('ROLE_ADMIN')")
      */
@@ -81,4 +93,17 @@ class FrontController extends Controller
       {		
       return $this->render('CoreBundle:Front:admin.html.twig');
       }
+	
+	//Page Mentions-Légales
+    public function mentionsLegalesAction()
+    {
+        return $this->render('CoreBundle:Front:mentions_legales.html.twig');
+    }
+	
+	//Page Contact
+    public function contactAction()
+    {
+        return $this->render('CoreBundle:Front:contact.html.twig');
+    }
+	
 }
