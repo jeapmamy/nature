@@ -20,7 +20,7 @@ class BackController extends Controller
      */
     public function adminAction()
       {		
-      return $this->render('CoreBundle:Front:admin.html.twig');
+      return $this->render('CoreBundle:Back:admin.html.twig');
       }
 	
 }
