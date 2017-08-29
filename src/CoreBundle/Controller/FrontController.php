@@ -14,18 +14,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class FrontController extends Controller
 {
+//Page accueil
     public function indexAction(Request $request)
     {
-        $Espece = new Espece();
-        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
-
-        return $this->render('CoreBundle:Front:index.html.twig',
-            array(
-           'form' => $form->createView(),
-           )
-        );
+        return $this->render('CoreBundle:Front:index.html.twig');
     }
 
+//Page recherche
     public function searchEspeceAction(Request $request)
     {
         $Espece = new Espece();
@@ -38,7 +33,7 @@ class FrontController extends Controller
         );
     }
 
-
+//Permet de  la liste des espèces pour l'autocomplétion 
     public function ajaxnatureAction(Request $request)
     {   
         if($request->isXmlHttpRequest())
@@ -54,8 +49,8 @@ class FrontController extends Controller
         }
     }
 
-    //controlleur getBird pour la fiche espece en parametre un id
-    //$.post('..')
+//controlleur getBird pour la fiche espece en parametre un id
+//$.post('..')
     public function searchFicheEspeceAction(Request $request, $id)
     {   
         $Espece = new Espece();

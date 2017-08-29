@@ -9,7 +9,7 @@ core_ajaxnature:
       _method: POST
 
 core_searchEspece:
-    path:     /rechercher
+    path:     /recherche
     defaults: { _controller: CoreBundle:Front:searchEspece }
 
 core_searchFicheEspece:
