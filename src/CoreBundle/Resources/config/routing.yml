@@ -34,4 +34,4 @@ core_contact:
 
 core_admin:
     path:     /admin
-    defaults: { _controller: CoreBundle:Front:admin }
+    defaults: { _controller: CoreBundle:Back:admin }

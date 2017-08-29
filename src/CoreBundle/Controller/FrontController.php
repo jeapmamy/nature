@@ -85,14 +85,6 @@ class FrontController extends Controller
     {
         return $this->render('CoreBundle:Front:association.html.twig');
     }
-		
-    /**
-     *@Security("has_role('ROLE_ADMIN')")
-     */
-    public function adminAction()
-      {		
-      return $this->render('CoreBundle:Front:admin.html.twig');
-      }
 	
 	//Page Mentions-Légales
     public function mentionsLegalesAction()
