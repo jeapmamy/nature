@@ -67,11 +67,6 @@ class FrontController extends Controller
             $response -> headers -> set('Content-Type', 'application/json');
             return $response;      
         }
-                return $this->render('CoreBundle:Front:recherche.html.twig',
-                    array(
-                   'form' => $form->createView(),
-                   )
-                );
     }
 	
 	//Page Observation
