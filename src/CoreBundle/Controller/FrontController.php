@@ -49,16 +49,13 @@ class FrontController extends Controller
         }
     }
 
-//controlleur getBird pour la fiche espece en parametre un id
-//$.post('..')
+//Permet de récupérer la fiche de l'espèce par ID
     public function searchFicheEspeceAction(Request $request, $id)
     {   
         $Espece = new Espece();
         $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
         if($request->isXmlHttpRequest())
         {
-
-            //$company = $request->request->get('company');
             $em = $this->getDoctrine()->getManager(); 
             $dalaliens = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
              
@@ -69,7 +66,7 @@ class FrontController extends Controller
         }
     }
 	
-	//Page Observation
+//Page Observation
     public function observationAction()
     {
         return $this->render('CoreBundle:Front:observation.html.twig');
