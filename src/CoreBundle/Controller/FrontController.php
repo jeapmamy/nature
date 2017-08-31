@@ -4,6 +4,7 @@ namespace CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CoreBundle\Entity\Espece;
+use CoreBundle\Entity\Observation;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Form\EspeceType;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,14 +58,21 @@ class FrontController extends Controller
         if($request->isXmlHttpRequest())
         {
             $em = $this->getDoctrine()->getManager(); 
-            $dalaliens = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
-             
-            $response = new Response(json_encode($dalaliens));
-             
+            //$searchFicheEspece = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
+            $listeObservation = $em->getRepository('CoreBundle:Observation')->mase($id);
+            //$data = array();
+            //$data['fiche'] = $searchFicheEspece;
+            //$data['observations'] = $listeObservation; 
+            $response = new Response(json_encode($listeObservation));
+
             $response -> headers -> set('Content-Type', 'application/json');
+
+
+
             return $response;      
         }
     }
+
 	
 //Page Observation
     public function observationAction()
