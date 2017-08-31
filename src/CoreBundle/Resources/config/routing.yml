@@ -16,6 +16,10 @@ core_searchFicheEspece:
     path:     /rechercher/{id}
     defaults: { _controller: CoreBundle:Front:searchFicheEspece }
 
+core_searchObservation:
+    path:     /obs/{id}
+    defaults: { _controller: CoreBundle:Front:searchObservation }
+
 core_observation:
     path:     /observation
     defaults: { _controller: CoreBundle:Front:observation }

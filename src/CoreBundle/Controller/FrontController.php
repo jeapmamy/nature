@@ -58,11 +58,33 @@ class FrontController extends Controller
         if($request->isXmlHttpRequest())
         {
             $em = $this->getDoctrine()->getManager(); 
+            $searchFicheEspece = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
+            //$listeObservation = $em->getRepository('CoreBundle:Observation')->mase($id);
+            //$data = array();
+            //$data['fiche'] = $searchFicheEspece;
+            //$data['observation'] = $listeObservation; 
+            $response = new Response(json_encode($searchFicheEspece));
+
+            $response -> headers -> set('Content-Type', 'application/json');
+
+
+
+            return $response;      
+        }
+    }
+//searchObservation
+    public function searchObservationAction(Request $request, $id)
+    {   
+        $Espece = new Espece();
+        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+        if($request->isXmlHttpRequest())
+        {
+            $em = $this->getDoctrine()->getManager(); 
             //$searchFicheEspece = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
             $listeObservation = $em->getRepository('CoreBundle:Observation')->mase($id);
             //$data = array();
             //$data['fiche'] = $searchFicheEspece;
-            //$data['observations'] = $listeObservation; 
+            //$data['observation'] = $listeObservation; 
             $response = new Response(json_encode($listeObservation));
 
             $response -> headers -> set('Content-Type', 'application/json');

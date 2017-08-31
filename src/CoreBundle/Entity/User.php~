@@ -30,4 +30,38 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+    /**
+     * Add observation
+     *
+     * @param \CoreBundle\Entity\Observation $observation
+     *
+     * @return User
+     */
+    public function addObservation(\CoreBundle\Entity\Observation $observation)
+    {
+        $this->observation[] = $observation;
+
+        return $this;
+    }
+
+    /**
+     * Remove observation
+     *
+     * @param \CoreBundle\Entity\Observation $observation
+     */
+    public function removeObservation(\CoreBundle\Entity\Observation $observation)
+    {
+        $this->observation->removeElement($observation);
+    }
+
+    /**
+     * Get observation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObservation()
+    {
+        return $this->observation;
+    }
 }

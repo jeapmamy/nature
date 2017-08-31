@@ -66,7 +66,7 @@ class Observation
 	
 	/**
 	 * 
-	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\User", inversedBy="observations", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\User", inversedBy="observation", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
 	 *
 	 */
@@ -203,4 +203,52 @@ class Observation
         return $this->statut;
     }
 
+
+    /**
+     * Set espece
+     *
+     * @param \CoreBundle\Entity\Espece $espece
+     *
+     * @return Observation
+     */
+    public function setEspece(\CoreBundle\Entity\Espece $espece)
+    {
+        $this->espece = $espece;
+
+        return $this;
+    }
+
+    /**
+     * Get espece
+     *
+     * @return \CoreBundle\Entity\Espece
+     */
+    public function getEspece()
+    {
+        return $this->espece;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CoreBundle\Entity\User $user
+     *
+     * @return Observation
+     */
+    public function setUser(\CoreBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

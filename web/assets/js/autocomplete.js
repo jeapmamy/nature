@@ -30,8 +30,16 @@ $("input[data-id=dallalien]").on('autocompleteselect',function(event, ui) {
     console.log('Event: ', event);
     console.log('UI :', ui.item);
     $(event.currentTarget).val(contact);
-    $.get('http://localhost/nature/web/app_dev.php/rechercher/' + id, function(response){
+
+    $.get('http://localhost/nature/web/app_dev.php/obs/' + id, function(response){
         console.log(response);
+        $('#latitude').html(response[0].latitude)
+        $('#longitude').html(response[0].longitude)
+        $('#date').html(response[0].date)
+    })
+
+    $.get('http://localhost/nature/web/app_dev.php/rechercher/' + id, function(response){
+        //console.log(response);
         $('#lbnomvern').html(response[0].a_nomVern)
         $('#lbauteur').html(response[0].a_lbAuteur)
         $('#famille').html(response[0].a_famille)
@@ -44,4 +52,6 @@ $("input[data-id=dallalien]").on('autocompleteselect',function(event, ui) {
         $('#phylum').html(response[0].a_phylum)
         $('#url').html(response[0].a_url)
     })
+
+
 })
