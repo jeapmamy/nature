@@ -66,7 +66,7 @@ class Observation
 	
 	/**
 	 * 
-	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\User", inversedBy="observations", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\User", inversedBy="observation", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
 	 *
 	 */

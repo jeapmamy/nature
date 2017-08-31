@@ -19,10 +19,49 @@ class User extends BaseUser
 	*/
 	protected $id;
 	
+	/**
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Observation", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $observation;
+	
 	
 	public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    /**
+     * Add observation
+     *
+     * @param \CoreBundle\Entity\Observation $observation
+     *
+     * @return User
+     */
+    public function addObservation(\CoreBundle\Entity\Observation $observation)
+    {
+        $this->observation[] = $observation;
+
+        return $this;
+    }
+
+    /**
+     * Remove observation
+     *
+     * @param \CoreBundle\Entity\Observation $observation
+     */
+    public function removeObservation(\CoreBundle\Entity\Observation $observation)
+    {
+        $this->observation->removeElement($observation);
+    }
+
+    /**
+     * Get observation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObservation()
+    {
+        return $this->observation;
     }
 }

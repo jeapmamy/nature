@@ -19,6 +19,12 @@ class User extends BaseUser
 	*/
 	protected $id;
 	
+	/**
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Observation", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $observation;
+	
+	
 	public function __construct()
     {
         parent::__construct();

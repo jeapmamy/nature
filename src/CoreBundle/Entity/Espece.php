@@ -105,6 +105,11 @@ class Espece
      */
     private $url;
 	
+	/**
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Observation", mappedBy="espece", cascade={"persist", "remove"})
+     */
+    private $observation;
+	
 
     /**
      * Get id
@@ -402,5 +407,48 @@ class Espece
     public function getUrl()
     {
         return $this->url;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->observation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add observation
+     *
+     * @param \CoreBundle\Entity\Observation $observation
+     *
+     * @return Espece
+     */
+    public function addObservation(\CoreBundle\Entity\Observation $observation)
+    {
+        $this->observation[] = $observation;
+		
+		//$observation->setEspece($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove observation
+     *
+     * @param \CoreBundle\Entity\Observation $observation
+     */
+    public function removeObservation(\CoreBundle\Entity\Observation $observation)
+    {
+        $this->observation->removeElement($observation);
+    }
+
+    /**
+     * Get observation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObservation()
+    {
+        return $this->observation;
     }
 }
