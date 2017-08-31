@@ -24,14 +24,14 @@ class EspeceRepository extends EntityRepository
 
         foreach($arrayAss as $data)
         {
-            //$data = $data['nomVern'] .", ". $data['lbAuteur'];
             $array[] = $data;
         }
      
         return $array;
     }
 
-    public function searchBird($id){
+    public function searchBird($id)
+    {
         $select =  $this->createQueryBuilder('a')
          ->select ('a')
          ->where('a.id = :id')->setParameter('id', $id)

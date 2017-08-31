@@ -9,6 +9,19 @@
 
 {% block titlepage %}
 <h2 style="text-align: center;">Faire une recherche</h2>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 {% endblock %}
 
 
@@ -31,62 +44,92 @@
 
 </div>
 
-<div class="table-style2">
+<div class="divider-info ptb column-style">
   <div class="sub-title">
     <span>Fiche de l'espèce</span>
   </div>
-  <div class="table-responsive mtb">
-    <table class="table table-bordered table-2 table-striped">
+  <div class="row">
+    <div class="col-sm-6">
+          <h5>Nom latin de l'espèce</h5>
+          <p id="lbnom"></p>
+        
+          <h5>Auteur</h5>
+          <p id="lbauteur"></p>
 
-      <tbody>
-        <tr>
-          <td>Nom latin de l'espèce</td>
-          <td id="lbnom"></td>
-        </tr>
-        <tr>
-          <td>Auteur</td>
-          <td id="lbauteur"></td>
-        </tr>
-        <tr>
-          <td>Nom vernaculaire (FR)</td>
-          <td id="lbnomvern"></td>
-        </tr>
-        <tr>
-          <td>Nom vernaculaire (ENG)</td>
-          <td id="nomVernEng"></td>
-        </tr>
-        <tr>
-          <td>Famille</td>
-          <td id="famille"></td>
-        </tr>
-        <tr>
-          <td>Phylum</td>
-          <td id="phylum"></td>
-        </tr>
-        <tr>
-          <td>Classe</td>
-          <td id="classe"></td>
-        </tr>
-        <tr>
-          <td>Ordre</td>
-          <td id="ordre"></td>
-        </tr>
-        <tr>
-          <td>Habitat</td>
-          <td id="habitat"></td>
-        </tr>
-        <tr>
-          <td>Fr</td>
-          <td id="fr"></td>
-        </tr>
-        <tr>
-          <td>Lien INPN</td>
-          <td id="url"><a href= ""></a></td>
-        </tr>
-      </tbody>
-    </table>
+          <h5>Nom vernaculaire (FR)</h5>
+          <p id="lbnomvern"></p>
+
+          <h5>Nom vernaculaire (ENG)</h5>
+          <p id="nomVernEng"></p>
+
+          <h5>Famille</h5>
+          <p id="famille"></p>
+
+          <h5>Phylum</h5>
+          <p id="phylum"></p>
+
+          <h5>Classe</h5>
+          <p id="classe"></p>
+
+          <h5>Ordre</h5>
+          <p id="ordre"></p>
+
+          <h5>Habitat</h5>
+          <p id="habitat"></p>
+
+          <h5>Fr</h5>
+          <p id="fr"></p>
+
+          <h5>Lien INPN</h5>
+          <p id="url"><a href= ""></a></p>
+
+    </div>
+    <div class="col-sm-6" style="">
+    <div id="map"></div>
+    </div>
   </div>
-</div>
+</div></br><hr>
+<div class="row">
+
+  <div class="col-sm-12">
+      <div class="table-style2">
+        <div class="sub-title">
+          <span>Les observations de l'espèce</span>
+        </div>
+        <div class="table-responsive mtb">
+          <table class="table table-bordered table-2 table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Row 1 Column 1</td>
+                <td>Row 1 Column 2</td>
+                <td><img src="http://localhost/nature/web/assets/img/nao_long.png" alt="" style="max-width: 80px;"></td>
+
+              </tr>
+              <tr>
+                <td>Row 2 Column 1</td>
+                <td>Row 2 Column 2</td>
+                <td>Row 2 Column 3</td>
+
+              </tr>
+              <tr>
+                <td>Row 3 Column 1</td>
+                <td>Row 3 Column 2</td>
+                <td>Row 3 Column 3</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+
 
 {% endblock %}
 
