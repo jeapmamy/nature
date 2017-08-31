@@ -38,6 +38,7 @@
 		<header>
 			<!-- Navigation
 			================================================== -->
+			
 			<nav class="navbar navbar-toggleable-sm navbar-light bg-black" style="background-color: green;">
 				<div class="container">
 					<a class="navbar-brand" href="{{ path('core_index') }}"><img src="http://localhost/nature/web/assets/img/nao_long.png" alt=""></a>
@@ -51,6 +52,7 @@
 							</li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_searchEspece') }}"><i class="fa fa-search" aria-hidden="true"></i> Recherche</a></li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_observation') }}"><i class="fa fa-eye" aria-hidden="true"></i> Observation</a></li>
+							<li class="nav-item"><a class="nav-link" href=""><i class="fa fa-commenting-o" aria-hidden="true"></i> Blog</a></li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_association') }}"><i class="fa fa-users" aria-hidden="true"></i> Association</a></li>
 							<li class="nav-item">
 								{% if is_granted('ROLE_ADMIN') %}
@@ -59,9 +61,14 @@
 							</li>
 							<li class="nav-item">
 								{% if is_granted('ROLE_USER') %}
-									<a class="nav-link" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a>
+									<a class="nav-link" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
 								{% else %}
-									<a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Connexion</a>
+									<a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+								{% endif %}
+							</li>
+							<li class="nav-item">
+								{% if is_granted('ROLE_USER') %}
+								<a class="nav-link" href="{{ path('fos_user_profile_edit') }}" title="Modifier mon profil"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a>
 								{% endif %}
 							</li>
 						</ul>
