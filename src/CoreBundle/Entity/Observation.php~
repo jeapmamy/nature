@@ -24,7 +24,7 @@ class Observation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -104,7 +104,7 @@ class Observation
      */
     public function getDate()
     {
-        return $this->date;
+        return $this->date->format('d-M-Y');
     }
 
     /**

@@ -25,6 +25,23 @@
 	<link rel="stylesheet" href="http://localhost/nature/web/assets/css/helium/responsive.css">
 	<link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="http://localhost/nature/web/assets/js/jquery-ui/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost/nature/web/assets/css/style.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- Fonts icons -->
 	<link rel="stylesheet" href="http://localhost/nature/web/assets/css/helium/font-awesome.min.css">
@@ -39,42 +56,35 @@
 			<!-- Navigation
 			================================================== -->
 			
-			<nav class="navbar navbar-toggleable-sm navbar-light bg-black" style="background-color: green;">
-				<div class="container">
-					<a class="navbar-brand" href="{{ path('core_index') }}"><img src="http://localhost/nature/web/assets/img/nao_long.png" alt=""></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-label="Toggle navigation">
-						<i class="fa fa-bars"></i>
-					</button>
-					<div class="collapse navbar-collapse justify-content-end" id="navbar2">
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link" href="{{ path('core_index') }}"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="{{ path('core_searchEspece') }}"><i class="fa fa-search" aria-hidden="true"></i> Recherche</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{ path('core_observation') }}"><i class="fa fa-eye" aria-hidden="true"></i> Observation</a></li>
-							<li class="nav-item"><a class="nav-link" href=""><i class="fa fa-commenting-o" aria-hidden="true"></i> Blog</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{ path('core_association') }}"><i class="fa fa-users" aria-hidden="true"></i> Association</a></li>
-							<li class="nav-item">
-								{% if is_granted('ROLE_ADMIN') %}
-									<a class="nav-link" href="{{ path('core_admin') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Administration</a>
-								{% endif %}
-							</li>
-							<li class="nav-item">
-								{% if is_granted('ROLE_USER') %}
-									<a class="nav-link" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-								{% else %}
-									<a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-								{% endif %}
-							</li>
-							<li class="nav-item">
-								{% if is_granted('ROLE_USER') %}
-								<a class="nav-link" href="{{ path('fos_user_profile_edit') }}" title="Modifier mon profil"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a>
-								{% endif %}
-							</li>
-						</ul>
+			<!-- nav bar -->
+			<nav class="wr-nav blur fixed full" style="background-color: #fcfcfc; opacity: 1;">
+					<div class="max-width container">
+						<div class="navBar clear">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-3">
+									<div id="logo" class="logo" style="margin-top: 10px; margin-bottom: 10px; ">
+										<img src="http://localhost/nature/web/assets/img/nao_long.png" alt="">
+									</div>
+								</div>
+								<!-- menu bar -->
+								<div class="col-xs-6 col-sm-6 col-md-9">
+									<div class="t-menu">
+										<a class="menu-r-btn f-title"><div class="wr-menu-btn"><p class="open-sidebar"></p></div></a>
+										<a class="back-btn hidden">BACK</a>
+										<ul class="menu-r right menu-mobile">
+											<li><a style="color: black;" href="#">Home</a></li>
+											<li class="list-icon-mb"><a style="color: black;" href="#">Recherche</a></li>
+											<li><a style="color: black;" href="#">Observation</a></li>
+											<li class="list-icon-mb"><a style="color: black;" href="#">Blog</a></li>
+											<li><a style="color: black;" href="#">L'association</a></li>
+											<li><a style="color: black;" href="#">Connexion</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-            </nav>
+			</nav><!-- End nav bar -->
 		</header>
 		{% block slider %}
 		{% endblock %}
@@ -130,6 +140,10 @@
 		<script src="http://localhost/nature/web/assets/js/helium/form-validator.min.js"></script>
 		<script src="http://localhost/nature/web/assets/js/helium/contact-form-script.js"></script>
 		<script src="http://localhost/nature/web/assets/js/helium/main.js"></script>
+
+		<!-- main js - style sheet MENU-->
+<script src="http://localhost/nature/web/assets/js/inviewport.js"></script>
+<script src="http://localhost/nature/web/assets/js/main.js"></script>
 
 	    <script>
 	      var map;
