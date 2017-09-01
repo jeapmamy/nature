@@ -24,6 +24,13 @@ class User extends BaseUser
      */
     private $observation;
 	
+	/**
+     * @var bool
+     *
+     * @ORM\Column(name="pro", type="boolean")
+     */
+    protected $pro;
+	
 	
 	public function __construct()
     {

@@ -35,7 +35,7 @@ $("input[data-id=dallalien]").on('autocompleteselect',function(event, ui) {
         console.log(response);
         $('#latitude').html(response[0].latitude)
         $('#longitude').html(response[0].longitude)
-        $('#date').html(response[0].date)
+        $('#date').html(response[0]['date'].date)
     })
 
     $.get('http://localhost/nature/web/app_dev.php/rechercher/' + id, function(response){

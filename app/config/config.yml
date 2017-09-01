@@ -79,3 +79,9 @@ fos_user:
     from_email:
         address: jeap.mamy@gmail.com
         sender_name: webmaster
+    registration:
+        form:
+            type: CoreBundle\Form\RegistrationType
+    profile:
+        form:
+            type: CoreBundle\Form\ProfileType

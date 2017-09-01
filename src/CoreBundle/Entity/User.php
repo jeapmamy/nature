@@ -24,6 +24,13 @@ class User extends BaseUser
      */
     private $observation;
 	
+	/**
+     * @var bool
+     *
+     * @ORM\Column(name="pro", type="boolean")
+     */
+    protected $pro;
+	
 	
 	public function __construct()
     {
@@ -63,5 +70,29 @@ class User extends BaseUser
     public function getObservation()
     {
         return $this->observation;
+    }
+
+    /**
+     * Set pro
+     *
+     * @param boolean $pro
+     *
+     * @return User
+     */
+    public function setPro($pro)
+    {
+        $this->pro = $pro;
+
+        return $this;
+    }
+
+    /**
+     * Get pro
+     *
+     * @return boolean
+     */
+    public function getPro()
+    {
+        return $this->pro;
     }
 }
