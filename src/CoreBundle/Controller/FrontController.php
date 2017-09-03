@@ -7,6 +7,7 @@ use CoreBundle\Entity\Espece;
 use CoreBundle\Entity\Observation;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Form\EspeceType;
+use CoreBundle\Form\ObservationType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\EntityRepository;
@@ -26,7 +27,6 @@ class FrontController extends Controller
     {
         $Espece = new Espece();
         $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
-
         return $this->render('CoreBundle:Front:recherche.html.twig',
             array(
            'form' => $form->createView(),
@@ -35,16 +35,14 @@ class FrontController extends Controller
     }
 
 //Permet de  la liste des espèces pour l'autocomplétion 
-    public function ajaxnatureAction(Request $request)
+    public function autocompletionAction(Request $request)
     {   
         if($request->isXmlHttpRequest())
         {
-            $company = $request->request->get('company');
+            $oiseau = $request->request->get('oiseau');
             $em = $this->getDoctrine()->getManager(); 
-            $dalaliens = $em->getRepository('CoreBundle:Espece')->listeNature($company); 
-             
-            $response = new Response(json_encode($dalaliens));
-             
+            $listeEspece = $em->getRepository('CoreBundle:Espece')->listeEspece($oiseau); 
+            $response = new Response(json_encode($listeEspece));
             $response -> headers -> set('Content-Type', 'application/json');
             return $response;      
         }
@@ -59,16 +57,8 @@ class FrontController extends Controller
         {
             $em = $this->getDoctrine()->getManager(); 
             $searchFicheEspece = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
-            //$listeObservation = $em->getRepository('CoreBundle:Observation')->mase($id);
-            //$data = array();
-            //$data['fiche'] = $searchFicheEspece;
-            //$data['observation'] = $listeObservation; 
             $response = new Response(json_encode($searchFicheEspece));
-
             $response -> headers -> set('Content-Type', 'application/json');
-
-
-
             return $response;      
         }
     }
@@ -80,26 +70,38 @@ class FrontController extends Controller
         if($request->isXmlHttpRequest())
         {
             $em = $this->getDoctrine()->getManager(); 
-            //$searchFicheEspece = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
             $listeObservation = $em->getRepository('CoreBundle:Observation')->mase($id);
-            //$data = array();
-            //$data['fiche'] = $searchFicheEspece;
-            //$data['observation'] = $listeObservation; 
             $response = new Response(json_encode($listeObservation));
-
             $response -> headers -> set('Content-Type', 'application/json');
-
-
-
             return $response;      
         }
     }
 
 	
 //Page Observation
-    public function observationAction()
+	/**
+     *@Security("has_role('ROLE_USER')")
+     */
+    public function observationAction(Request $request)
     {
-        return $this->render('CoreBundle:Front:observation.html.twig');
+		$observation = new Observation();
+		$form = $this->createForm(ObservationType::class, $observation);
+
+		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			//$observation->setEspece(12);
+			//$observation->setUser(1);
+			$em->persist($observation);
+			$em->flush();
+
+			$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
+
+			return $this->redirectToRoute('core_index');
+		}
+
+		return $this->render('CoreBundle:Front:observation.html.twig', array(
+			'form' => $form->createView(),
+		));
     }
 	
 	//Page Association

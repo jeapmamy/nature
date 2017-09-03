@@ -8,7 +8,7 @@
 
 
 {% block titlepage %}
-<h2 style="text-align: center;">Faire une recherche</h2>
+<h2>Faire une recherche</h2>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -27,21 +27,16 @@
 
 {% block core_body %}
 <div class="well">
-	<h2>Cherchez par espèce</h2>
-
 		{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-		  	{{ form_label(form.nomVern, "Nom de l'espèce") }}
+		  	
 		 	{{ form_widget(form.nomVern, {
 				'attr': {
-				   	'data-id': 'dallalien',
-				   	'data-url': path('core_ajaxnature')
+				   	'data-id': 'listedesespeces',
+				   	'data-url': path('core_autocompletion')
 				   	}
 		  		})
 			}}
-
 		{{ form_end(form) }}
-
-
 </div>
 
 <div class="divider-info ptb column-style">

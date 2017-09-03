@@ -10,6 +10,11 @@ div {
 }
 */
 
+h2 {
+	text-align: center;
+}
+
+
 /* Form Login
  ------------ */
 
@@ -56,12 +61,18 @@ div {
 	*/
 }
 
+.nav-link {
+	font-size: 30px;
+}
+
+#piedBlog {
+	background-color: #fcfcfc;
+}
 /* Footer
  -------- */
 
 footer {
 	background: #ccc;
-	position: fixed;
 	bottom: 0;
 	width: 100%;
 	padding-top: 10px;
