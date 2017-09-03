@@ -6,10 +6,24 @@
 	Observation - {{ parent() }}
 {% endblock %}
 
-
 {% block titlepage %}
-	<h2 style="text-align: center;">Ajouter une observation</h2>
+<h2>Ajouter une observation</h2>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 {% endblock %}
+
+
 
 
 {% block core_body %}
@@ -19,7 +33,9 @@
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(form) }}
-
+    <div id="nomVern">
+      {{ form_widget(form.espece)}}
+    </div>
 		<div id="dateObs">
 			{{ form_label(form.date, "Date : ", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
 			{{ form_errors(form.date) }}
@@ -66,6 +82,10 @@
 		{{ form_end(form) }}
 
 
-	</div>
-{% endblock %}
+	   <div class="col-sm-6" style="">
+	    <div id="map"></div>
+	    </div>
 
+	</div><br /><hr>
+	
+{% endblock %}

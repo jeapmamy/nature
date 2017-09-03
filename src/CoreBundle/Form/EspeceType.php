@@ -16,7 +16,12 @@ class EspeceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomVern',    TextType::class);
+            ->add('nomVern',    TextType::class, array(
+                 'attr' => array(
+                            'placeholder'=> 'Saisissez ici le nom de l\'oiseau rechercher...',
+                            'data-id'=> 'listedesespeces',
+                            'data-url'=> '/nature/web/app_dev.php/autocompletion',
+                            )));
     }
     
     /**

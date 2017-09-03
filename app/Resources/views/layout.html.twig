@@ -39,7 +39,7 @@
 			<!-- Navigation
 			================================================== -->
 			
-			<nav class="navbar navbar-toggleable-sm navbar-light bg-black" style="background-color: green;">
+			<nav class="navbar navbar-toggleable-sm navbar-light bg-black" style="background-color: #fcfcfc;">
 				<div class="container">
 					<a class="navbar-brand" href="{{ path('core_index') }}"><img src="http://localhost/nature/web/assets/img/nao_long.png" alt=""></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@
 							</li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_searchEspece') }}"><i class="fa fa-search" aria-hidden="true"></i> Recherche</a></li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_observation') }}"><i class="fa fa-eye" aria-hidden="true"></i> Observation</a></li>
-							<li class="nav-item"><a class="nav-link" href=""><i class="fa fa-commenting-o" aria-hidden="true"></i> Blog</a></li>
+							<li class="nav-item"><a class="nav-link" href="https://nosamislesoiseauxblog.wordpress.com/"><i class="fa fa-commenting-o" aria-hidden="true"></i> Blog</a></li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_association') }}"><i class="fa fa-users" aria-hidden="true"></i> Association</a></li>
 							<li class="nav-item">
 								{% if is_granted('ROLE_ADMIN') %}
@@ -161,6 +161,18 @@
 	    <script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_XXnags0z7NC28Q4BvDKZ8PuE8AeBBEw&callback=initMap">
 	    </script>
+<script>
+$(function(){
+
+  $('#datepicker').attr( 'readOnly' , 'true' ).datepicker({
+
+    dateFormat: 'dd/mm/yy',
+    firstDay: 1,
+    beforeShowDay: disabledays
+  });
+});
+</script>
+
 	{% endblock %}
 
 </body>

@@ -2,9 +2,9 @@ core_index:
     path:     /
     defaults: { _controller: CoreBundle:Front:index }
 
-core_ajaxnature:
-    path:     /ajaxnature
-    defaults: { _controller: CoreBundle:Front:ajaxnature }
+core_autocompletion:
+    path:     /autocompletion
+    defaults: { _controller: CoreBundle:Front:autocompletion }
     requirements:
       _method: POST
 
