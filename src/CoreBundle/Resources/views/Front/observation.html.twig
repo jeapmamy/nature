@@ -27,66 +27,65 @@
 
 
 {% block core_body %}
-	<div class="divider-info ptb column-style">
-	  <div class="row">
-	    <div class="col-sm-6">
-	    	{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-		    	<div class="sub-title">
-				    <span>Quel oiseau ?</span>
-				</div>
-		    	<p>Veuillez saisir le nom de l'espèce que vous recherchez ci-dessous</p>
-		    	
-			  	
-			 	{{ form_widget(form.espece)}}
+	<div class="well">
+		<h2>Ajouter une observation</h2>
+		{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(form) }}
+    <div id="nomVern">
+      {{ form_widget(form.espece)}}
+    </div>
+		<div id="dateObs">
+			{{ form_label(form.date, "Date : ", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+			{{ form_errors(form.date) }}
+
+			<div class="col-sm-2">
+				{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+
+		{# Génération manuelle et éclatée : #}
+		<div class="form-group">
+			{# Génération du label. #}
+			{{ form_label(form.latitude, "Latitude : ", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+			{# Affichage des erreurs pour ce champ précis. #}
+			{{ form_errors(form.latitude) }}
+
+			<div class="col-sm-10">
+				{# Génération de l'input. #}
+				{{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+
+		{# Idem pour un autre champ. #}
+		<div class="form-group">
+			{{ form_label(form.longitude, "Longitude : ", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+			{{ form_errors(form.longitude) }}
+			<div class="col-sm-10">
+				{{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+
+		{{ form_row(form.image) }}
 		
-				<p>Vous avez un doute ? <a href="">Vérifier que c'est bonne espèce</a></p><hr></br>
 
-				<div class="sub-title">
-				    <span>Quand ?</span>
-				</div>
-				<p>Indiquer la date à laquelle vous avez observez l'espèce:</p>
+		{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+		{{ form_widget(form.save, {'label': 'Soumettre l\'observation', 'attr': {'class': 'btn btn-primary'}}) }}
 
-				<div id="dateObs">
-		 			{{ form_errors(form.date) }}
-		 
-		 			<div class="col-sm-5">
-		 				{{ form_widget(form.date, {'id': 'datepicker'}) }}
-		 			</div>
-		 		</div>
+		{# Génération automatique des champs pas encore écrits.
+			Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+			et tous les champs cachés (type « hidden »). #}
+		{{ form_rest(form) }}
 
-				<hr></br>
-				<div class="sub-title">
-				    <span>Oû ?</span>
-				</div>
+		{{ form_end(form) }}
 
-				  	
-			 	{{ form_widget(form.Latitude, {
-					'attr': {
-	        			'placeholder': 'Saisissez ici la latitude...',
-					   	}
-			  		})
-				}}
 
-				{{ form_widget(form.Longitude, {
-					'attr': {
-	        			'placeholder': 'Saisissez ici la longitude...',
-					   	}
-			  		})
-				}}
-				
-				<hr></br>
-				<div class="sub-title">
-				    <span>Ajouter une photo ! </span>
-				</div>
-				{{ form_row(form.image) }}
-				{{ form_widget(form.Envoyer) }}
-			{{ form_end(form) }}
-
-	    </div>
-	    <div class="col-sm-6" style="">
+	   <div class="col-sm-6" style="">
 	    <div id="map"></div>
 	    </div>
-	  </div>
+
 	</div><br /><hr>
 	
 {% endblock %}
