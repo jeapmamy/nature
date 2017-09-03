@@ -7,14 +7,14 @@ use Doctrine\ORM\QueryBuilder;
 
 class EspeceRepository extends EntityRepository
 {
-	public function listeNature($company)
+	public function listeEspece($oiseau)
     {
         $qb = $this->createQueryBuilder('c');
          
         $qb ->select('c')
             
-            ->where('c.nomVern LIKE :company')
-            ->setParameter('company', '%'.$company.'%');
+            ->where('c.nomVern LIKE :oiseau')
+            ->setParameter('oiseau', '%'.$oiseau.'%');
          
         $arrayAss= $qb->getQuery()
                    ->getArrayResult();

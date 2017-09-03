@@ -1,7 +1,7 @@
-$("input[data-id=dallalien]").autocomplete({
+$("input[data-id=listedesespeces]").autocomplete({
     source: function (request, response) {
-        var company = $("input[data-id=dallalien]").val();
-        var objData = 'company=' + company;
+        var oiseau = $("input[data-id=listedesespeces]").val();
+        var objData = 'oiseau=' + oiseau;
         var url = $(this.element).attr('data-url');
            
         $.ajax({
@@ -23,7 +23,7 @@ $("input[data-id=dallalien]").autocomplete({
         });
     }
 })
-$("input[data-id=dallalien]").on('autocompleteselect',function(event, ui) {
+$("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) {
     event.preventDefault();
     var contact = ui.item.label;
         id = ui.item.value;

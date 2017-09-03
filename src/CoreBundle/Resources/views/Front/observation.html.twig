@@ -6,18 +6,87 @@
 	Observation - {{ parent() }}
 {% endblock %}
 
-
 {% block titlepage %}
-	<h2 style="text-align: center;">Ajouter une observation</h2>
+<h2>Ajouter une observation</h2>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 {% endblock %}
+
+
 
 
 {% block core_body %}
-	<div class="well">
-		<h2></h2>
+	<div class="divider-info ptb column-style">
+	  <div class="row">
+	    <div class="col-sm-6">
+	    	{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+		    	<div class="sub-title">
+				    <span>Quel oiseau ?</span>
+				</div>
+		    	<p>Veuillez saisir le nom de l'espèce que vous recherchez ci-dessous</p>
+		    	
+			  	
+			 	{{ form_widget(form.espece)}}
+		
+				<p>Vous avez un doute ? <a href="">Vérifier que c'est bonne espèce</a></p><hr></br>
 
+				<div class="sub-title">
+				    <span>Quand ?</span>
+				</div>
+				<p>Indiquer la date à laquelle vous avez observez l'espèce:</p>
 
+				<div id="dateObs">
+		 			{{ form_errors(form.date) }}
+		 
+		 			<div class="col-sm-5">
+		 				{{ form_widget(form.date, {'id': 'datepicker'}) }}
+		 			</div>
+		 		</div>
 
-	</div>
+				<hr></br>
+				<div class="sub-title">
+				    <span>Oû ?</span>
+				</div>
+
+				  	
+			 	{{ form_widget(form.Latitude, {
+					'attr': {
+	        			'placeholder': 'Saisissez ici la latitude...',
+					   	}
+			  		})
+				}}
+
+				{{ form_widget(form.Longitude, {
+					'attr': {
+	        			'placeholder': 'Saisissez ici la longitude...',
+					   	}
+			  		})
+				}}
+				
+				<hr></br>
+				<div class="sub-title">
+				    <span>Ajouter une photo ! </span>
+				</div>
+				{{ form_row(form.image) }}
+				{{ form_widget(form.Envoyer) }}
+			{{ form_end(form) }}
+
+	    </div>
+	    <div class="col-sm-6" style="">
+	    <div id="map"></div>
+	    </div>
+	  </div>
+	</div><br /><hr>
+	
 {% endblock %}
-
