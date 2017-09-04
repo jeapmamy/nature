@@ -68,7 +68,7 @@
 							</li>
 							<li class="nav-item">
 								{% if is_granted('ROLE_USER') %}
-								<a class="nav-link" href="{{ path('fos_user_profile_edit') }}" title="Modifier mon profil"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a>
+									<a class="nav-link" href="{{ path('fos_user_profile_edit') }}" title="Modifier mon profil"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a>
 								{% endif %}
 							</li>
 						</ul>
@@ -110,7 +110,8 @@
 		</footer>
 
 
-
+		<!-- JavaScript
+		================================================== -->
 	{% block javascripts %} 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://localhost/nature/web/assets/js/helium/jquery.min.js"></script>
@@ -132,13 +133,12 @@
 		<script src="http://localhost/nature/web/assets/js/helium/contact-form-script.js"></script>
 		<script src="http://localhost/nature/web/assets/js/helium/main.js"></script>
 
-	    <!-- Script Map
-		================================================== -->
-	    <script>
 
-	    </script>
+		<!-- Script Map
+		================================================== -->
+
 	    <script async defer
-	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_XXnags0z7NC28Q4BvDKZ8PuE8AeBBEw&callback=initMap">
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_XXnags0z7NC28Q4BvDKZ8PuE8AeBBEw">
 	    </script>
 
 	{% endblock %}

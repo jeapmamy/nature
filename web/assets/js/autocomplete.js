@@ -1,5 +1,3 @@
-function initMap() {
-
 var self = this;
 
 
@@ -78,7 +76,6 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 
 })
 
-}
 
 $(function(){
     self.map = new google.maps.Map($('#map')[0], {
