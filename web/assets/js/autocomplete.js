@@ -1,12 +1,3 @@
-var self = this;
-function initMap(){
-        self.map = new google.maps.Map($('#map')[0], {
-        center: new google.maps.LatLng(46.606111,1.845278),
-        zoom: 5,
-    });
-}
-
-
 $("input[data-id=listedesespeces]").autocomplete({
     source: function (request, response) {
         var oiseau = $("input[data-id=listedesespeces]").val();
@@ -79,7 +70,4 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         $('#url').html(response[0].a_url)
         $('#url').attr("href", response[0].a_url)
     })
-
-})
-
 
