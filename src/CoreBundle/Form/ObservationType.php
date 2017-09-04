@@ -31,7 +31,10 @@ class ObservationType extends AbstractType
 					'readonly' 	=> true,)
 				)
 			)
-      		->add('espece',    EspeceType::class, array('data_class' => null))
+
+
+
+      ->add('espece',    EspeceType::class, array('data_class' => null))
 			->add('latitude',	NumberType::class)
 			->add('longitude',	NumberType::class)
 			->add('image',		FileType::class, array(
