@@ -1,3 +1,5 @@
+var self = this;
+
 $("input[data-id=listedesespeces]").autocomplete({
     source: function (request, response) {
         var oiseau = $("input[data-id=listedesespeces]").val();
@@ -37,6 +39,22 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         $('#latitude').html(response[0].latitude)
         $('#longitude').html(response[0].longitude)
         $('#date').html(response[0]['date'].date)
+
+
+
+        var markers = [];
+
+        $.each(response, function(ix, obs) {
+            console.log(obs);
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: obs.latitude*1,
+                    lng: obs.longitude*1
+                },
+                map: self.map
+            });
+            markers.push(marker);
+        });
     })
 
     $.get('http://localhost/nature/web/app_dev.php/rechercher/' + id, function(response){
@@ -52,32 +70,17 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         $('#ordre').html(response[0].a_ordre)
         $('#phylum').html(response[0].a_phylum)
         $('#url').html(response[0].a_url)
+        $('#url').attr("href", response[0].a_url)
     })
-
 
 })
 
-            var map;
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 5,
-                    center: new google.maps.LatLng(46.606111,1.845278),
-                    mapTypeId: 'terrain'
-                });
+$(function(){
+    self.map = new google.maps.Map($('#map')[0], {
+        center: new google.maps.LatLng(46.606111,1.845278),
+        zoom: 5,
+    });
+})
 
-                var script = document.createElement('script');
-                script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-                document.getElementsByTagName('head')[0].appendChild(script);
-            }
-
-
-            window.eqfeed_callback = function(results) {
-                for (var i = 0; i < results.features.length; i++) {
-                    var coords = results.features[i].geometry.coordinates;
-                    var latLng = new google.maps.LatLng(45,3);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: map
-                    });
-                }
-            }
+     
+ 
