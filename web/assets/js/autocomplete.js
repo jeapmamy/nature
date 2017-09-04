@@ -3,7 +3,7 @@ $("input[data-id=listedesespeces]").autocomplete({
         var oiseau = $("input[data-id=listedesespeces]").val();
         var objData = 'oiseau=' + oiseau;
         var url = $(this.element).attr('data-url');
-           
+        
         $.ajax({
             url: url,
             dataType: "json",
@@ -23,6 +23,7 @@ $("input[data-id=listedesespeces]").autocomplete({
         });
     }
 })
+
 $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) {
     event.preventDefault();
     var contact = ui.item.label;
@@ -55,3 +56,28 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 
 
 })
+
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 5,
+                    center: new google.maps.LatLng(46.606111,1.845278),
+                    mapTypeId: 'terrain'
+                });
+
+                var script = document.createElement('script');
+                script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+                document.getElementsByTagName('head')[0].appendChild(script);
+            }
+
+
+            window.eqfeed_callback = function(results) {
+                for (var i = 0; i < results.features.length; i++) {
+                    var coords = results.features[i].geometry.coordinates;
+                    var latLng = new google.maps.LatLng(45,3);
+                    var marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map
+                    });
+                }
+            }
