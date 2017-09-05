@@ -4,14 +4,34 @@ body, html{
 header {
 	margin-bottom: 50px;
 }
-/*
-div {
-	border: solid red 1px;
+.navbar-light {
+	border-bottom: solid orange 10px;
 }
-*/
+#global {
+	background-color: #fcfcfc;
+}
+
 
 h2 {
 	text-align: center;
+}
+
+/* Form Observation
+ ------------------ */
+
+.sub-title {
+	padding: 10px 10px 10px 10px;
+	background: #eee;
+	border-bottom: solid #ccc 1px;
+}
+
+.bloc-obs {
+	/*padding: 10px 10px 10px 10px;*/
+	border: solid #ccc 1px;
+}
+
+.corps {
+	padding: 10px 10px 10px 10px;
 }
 
 
@@ -66,7 +86,7 @@ h2 {
 }
 
 #piedBlog {
-	background-color: #fcfcfc;
+	background-color: #f1f1f1;
 }
 /* Footer
  -------- */

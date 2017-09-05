@@ -29,14 +29,16 @@ class ObservationType extends AbstractType
 				'attr'		=> array(
 					'class' 	=> 'form-control input-inline',
 					'readonly' 	=> true,)
-				)
-			)
-
-
-
-      ->add('espece',    EspeceType::class, array('data_class' => null))
-			->add('latitude',	NumberType::class)
-			->add('longitude',	NumberType::class)
+			))
+      		->add('espece',    EspeceType::class, array('data_class' => null))
+			->add('latitude',	NumberType::class, array(
+				'attr'		=> array(
+					'readonly'	=> true,)
+			))
+			->add('longitude',	NumberType::class, array(
+				'attr'		=> array(
+					'readonly'	=> true,)
+			))
 			->add('image',		FileType::class, array(
 				'required'	=> false,
 			))

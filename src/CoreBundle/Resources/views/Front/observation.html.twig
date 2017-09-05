@@ -12,7 +12,8 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        height: 250px;
+		width: 600px;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -27,90 +28,118 @@
 
 
 {% block core_body %}
-	<div class="divider-info ptb column-style">
-		<div class="row">
+	
+		
 
-			<div class="col-sm-6" style="">
+			<div class="col-sm-offset-2 col-sm-8" style="">
 				{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
 				{# Les erreurs générales du formulaire. #}
 				{{ form_errors(form) }}
-				<div class="sub-title">
-				    <span>Quel oiseau ?</span>
-				</div>
-				<p>Veuillez saisir le nom de l'espèce que vous recherchez ci-dessous</p>
-				{{ form_label(form.espece, "Nom de l'espèce : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-			    <div id="nomVern">
-			      {{ form_widget(form.espece)}}
-			    </div>
+				<div class="bloc-obs">
+					<div class="sub-title">
+						<span>Quel oiseau ?</span>
+					</div>
+					<div class="corps">
+						<p>Veuillez saisir le nom de l'espèce que vous recherchez ci-dessous</p>
+						{{ form_label(form.espece, "Nom de l'espèce : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+						{{ form_errors(form.espece) }}
+						<div id="nomVern">
+						  {{ form_widget(form.espece)}}
+						</div>
 
-			    <p>Vous avez un doute ? Vérifier que c'est la bonne espèce! <a id = 'url' href=""></a></p><hr></br>
-
-			    <div class="sub-title">
-				    <span>Quand ?</span>
-				</div>
-
-				<div id="dateObs">
-					{{ form_label(form.date, "Date : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-					{{ form_errors(form.date) }}
-
-					<div class="col-sm-5">
-						{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+						<p>Vous avez un doute ? Vérifiez l'espèce à l'aide de la fiche INPN ! <a id = 'url' href="" target="_blank"></a></p>
 					</div>
 				</div>
-
-				<hr><br />
-
-				<div class="sub-title">
-				    <span>Oû ?</span>
-				</div>
-
-				{# Génération manuelle et éclatée : #}
-				<div class="form-group">
-					{# Génération du label. #}
-					{{ form_label(form.latitude, "Latitude : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-
-					{# Affichage des erreurs pour ce champ précis. #}
-					{{ form_errors(form.latitude) }}
-
-					<div class="col-sm-10">
-						{# Génération de l'input. #}
-						{{ form_widget(form.latitude, {
-							'attr': {
-								'class': 'form-control',
-								'placeholder': 'Saisissez ici la latitude...',
-							}}) 
-						}}
-					</div>
-				</div>
-
-				{# Idem pour un autre champ. #}
-				<div class="form-group">
-					{{ form_label(form.longitude, "Longitude : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
-					{{ form_errors(form.longitude) }}
-
-					<div class="col-sm-10">
-						{{ form_widget(form.longitude, {
-							'attr': {
-								'class': 'form-control',
-								'placeholder': 'Saisissez ici la longitude...',
-							}}) 
-						}}
-					</div>
-				</div>
-
-				<hr><br />
-
-				<div class="sub-title">
-				    <span>Ajouter une photo ! </span>
-				</div>
-
-
-				{{ form_row(form.image) }}
+				<br />
 				
+				<div class="bloc-obs">
+					<div class="sub-title">
+						<span>Quand ?</span>
+					</div>
+				
+					<div class="corps" id="dateObs">
+						{{ form_label(form.date, "Date : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+						{{ form_errors(form.date) }}
+
+						<div class="col-sm-5">
+							{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+				</div>
+				<br />
+				
+				<div class="bloc-obs">
+					<div class="sub-title">
+						<span>Où ?</span>
+					</div>
+
+					<div class="col-sm-12" style="">
+						<div id="map"></div>
+					</div>
+					<br />
+					
+					<div>
+						<div class="container col-sm-offset-1 col-sm-10">
+							<div class="row">
+								{# Génération manuelle et éclatée : #}
+								<div class="form-group bloc-obs col-sm-6">
+
+									{# Génération du label. #}
+									{{ form_label(form.latitude, "Latitude : ", {'label_attr': {'class': 'col-sm-10 control-label sub-title'}}) }}
+
+									{# Affichage des erreurs pour ce champ précis. #}
+									{{ form_errors(form.latitude) }}
+
+									<div class="col-sm-10 corps">
+										{# Génération de l'input. #}
+										{{ form_widget(form.latitude, {
+											'attr': {
+												'class': 'form-control',
+												'placeholder': 'Cliquez sur la carte...',
+											}}) 
+										}}
+									</div>
+
+								</div>
+
+								{# Idem pour un autre champ. #}
+								<div class="form-group bloc-obs col-sm-6">
+									{{ form_label(form.longitude, "Longitude : ", {'label_attr': {'class': 'col-sm-10 control-label sub-title'}}) }}
+									{{ form_errors(form.longitude) }}
+
+									<div class="col-sm-10 corps">
+										{{ form_widget(form.longitude, {
+											'attr': {
+												'class': 'form-control',
+												'placeholder': 'Cliquez sur la carte...',
+											}}) 
+										}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+					
+				<div class="bloc-obs">
+					<div class="sub-title">
+						<span>Ajoutez une photo ! </span>
+					</div>
+					<div class="corps">
+						{{ form_label(form.image, "Image : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+						{{ form_errors(form.image) }}
+
+						<div class="col-sm-10">
+							{{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+				</div>
+				<br />
 
 				{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-				{{ form_widget(form.save, {'label': 'Soumettre l\'observation', 'attr': {'class': 'btn btn-primary'}}) }}
+				{{ form_widget(form.save, {'label': 'Soumettre l\'observation', 'attr': {'class': 'btn btn-lg btn-primary'}}) }}
 
 				{# Génération automatique des champs pas encore écrits.
 					Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
@@ -119,73 +148,71 @@
 
 				{{ form_end(form) }}
 			</div>
+			
+		   	
+	   
 
-		   	<div class="col-sm-6" style="">
-		    	<div id="map"></div>
-
-		   	</div>
-	    </div>
-
-	</div>
+	
 	<br /><hr>
 
 	<script>
 		var self = this;
-function initMap(){
-        self.map = new google.maps.Map($('#map')[0], {
-        center: new google.maps.LatLng(46.606111,1.845278),
-        zoom: 5,
-    });
-     var infoWindow = new google.maps.InfoWindow({
-                map: map
-            });
+		function initMap(){
+			self.map = new google.maps.Map($('#map')[0], {
+			center: new google.maps.LatLng(46.606111,1.845278),
+			zoom: 5,
+			});
+			var infoWindow = new google.maps.InfoWindow({
+				map: map
+			});
 
-            // Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    map.setCenter(pos);
-                    // Ajout d'un marqueur
-                    var marker = new google.maps.Marker({
-                        position: pos,
+			// Try HTML5 geolocation.
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var pos = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+					map.setCenter(pos);
+					// Ajout d'un marqueur
+					var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+					var beachMarker = new google.maps.Marker({
+						position: pos,
+						map: map,
+						icon: image,
+						title: 'Votre position géolocalisée'
+					});
+					document.getElementById("corebundle_observation_latitude").value = position.coords.latitude;
+					document.getElementById("corebundle_observation_longitude").value = position.coords.longitude;
 
-                        map: map,
-                        title: 'Votre position géolocalisée'
-                    });
-                    document.getElementById("corebundle_observation_latitude").value = position.coords.latitude;
-                    document.getElementById("corebundle_observation_longitude").value = position.coords.longitude;
+				}, function() {
+					handleLocationError(true, infoWindow, map.getCenter());
+				});
+			} else {
+				// Browser doesn't support Geolocation
+				handleLocationError(false, infoWindow, map.getCenter());
 
-                }, function() {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
+			}
 
-            }
-            
-            google.maps.event.addListener(map, 'click', function(event) {
-                placeMarker(event.latLng);
-              });
+			google.maps.event.addListener(map, 'click', function(event) {
+				placeMarker(event.latLng);
+			  });
 
-            var marker;
-            function placeMarker(location) {
-              if(marker){ //on vérifie si le marqueur existe
-                marker.setPosition(location); //on change sa position
-              }else{
-                marker = new google.maps.Marker({ //on créé le marqueur
-                  position: location,
-                  map: map,
-                  title: 'Votre nouveau choix'
-                });
-              }
-              document.getElementById("corebundle_observation_latitude").value=location.lat();
-              document.getElementById("corebundle_observation_longitude").value=location.lng();
-            }
-}
+			var marker;
+			function placeMarker(location) {
+			  if(marker){ //on vérifie si le marqueur existe
+				marker.setPosition(location); //on change sa position
+			  }else{
+				marker = new google.maps.Marker({ //on créé le marqueur
+				  position: location,
+				  map: map,
+				  title: 'Votre nouveau choix'
+				});
+			  }
+			  document.getElementById("corebundle_observation_latitude").value=location.lat();
+			  document.getElementById("corebundle_observation_longitude").value=location.lng();
+			}
+		}
 	</script>
 
 {% endblock %}
