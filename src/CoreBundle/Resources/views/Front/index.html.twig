@@ -44,9 +44,36 @@
 {% endblock %}
 
 {% block core_body %}
+		
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
 
+<div class="container marketing">
 
-   
+	<!-- Three columns of text below the carousel -->
+	<div class="row">
+		<div class="col-lg-4">
+			<i class="fa fa-search fa-5x" aria-hidden="true"></i>
+			<h2>Effectuez une recherche</h2>
+			<p>Vous désirez identifier une espèce, en savoir plus sur les oiseaux présents autour de vous... N'hésitez pas à faire une recherche !</p>
+			<p><a class="btn btn-info" href="{{ path('core_searchEspece') }}" role="button">Recherchez &raquo;</a></p>
+		</div><!-- /.col-lg-4 -->
+		<div class="col-lg-4">
+			<i class="fa fa-eye fa-5x" aria-hidden="true"></i>
+			<h2>Ajoutez une observation</h2>
+			<p>Par la saisie de vos observations, vous participez à un programme de recherche visant à étudier les effets du climat, de l’urbanisation et de l’agriculture sur la biodiversité.</p>
+			<p><a class="btn btn-info" href="{{ path('core_observation') }}" role="button">Ajoutez &raquo;</a></p>
+		</div><!-- /.col-lg-4 -->
+		<div class="col-lg-4">
+			<i class="fa fa-users fa-5x" aria-hidden="true"></i>
+			<h2>Découvrez l'association</h2>
+			<p>Michel Dujardin est le fondateur de l’association NAO (Nos Amis les Oiseaux), regroupant les passionnés d’ornithologie. Il est à l'origine de la mise en place de cette application participative.</p>
+			<p><a class="btn btn-info" href="{{ path('core_association') }}" role="button">En savoir plus &raquo;</a></p>
+		</div><!-- /.col-lg-4 -->
+	</div><!-- /.row -->
+</div>
+
 
 {% endblock %}
 
