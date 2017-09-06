@@ -26,12 +26,12 @@ h2 {
 }
 
 .bloc-obs {
-	/*padding: 10px 10px 10px 10px;*/
 	border: solid #ccc 1px;
 }
 
 .corps {
-	padding: 0px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	/*border: solid red 1px;*/
 }
 
 

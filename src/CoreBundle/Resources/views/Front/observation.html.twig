@@ -28,15 +28,17 @@
 
 
 {% block core_body %}
-	
+			
 		
-
-			<div class="col-sm-offset-2 col-sm-8" style="">
+		<div class="container">
+			
 				{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
 				{# Les erreurs générales du formulaire. #}
 				{{ form_errors(form) }}
-				<div class="bloc-obs">
+			<div class="row" style="">
+				<div class="col-lg-1"></div>
+				<div class="bloc-obs col-lg-10">
 					<div class="sub-title">
 						<span>Quel oiseau ?</span>
 					</div>
@@ -45,15 +47,17 @@
 						{{ form_label(form.espece, "Nom de l'espèce : ", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
 						{{ form_errors(form.espece) }}
 						<div id="nomVern">
-						  {{ form_widget(form.espece)}}
+						  {{ form_widget(form.espece) }}
 						</div>
 
-						<p>Vous avez un doute ? Vérifiez l'espèce à l'aide de la fiche INPN ! <a id = 'url' href="" target="_blank"></a></p>
+						<p>Vous avez un doute ? Vérifiez l'espèce à l'aide de sa fiche INPN ! <a id = 'url' href="" target="_blank"></a></p>
 					</div>
 				</div>
-				<br />
-				
-				<div class="bloc-obs">
+			</div>
+			<br />
+			<div class="row" style="">	
+				<div class="col-lg-1"></div>
+				<div class="bloc-obs col-lg-10">
 					<div class="sub-title">
 						<span>Quand ?</span>
 					</div>
@@ -67,31 +71,34 @@
 						</div>
 					</div>
 				</div>
-				<br />
-				
-				<div class="bloc-obs">
+			</div>
+			<br />
+			<div class="row" style="">
+				<div class="col-lg-1"></div>
+				<div class="bloc-obs col-lg-10">
 					<div class="sub-title">
 						<span>Où ?</span>
 					</div>
 
-					<div class="col-sm-12" id="map" style="">
+					<div class="col-lg-12" id="map" style="">
 						
 					</div>
 					<br />
 					
 					<div>
-						<div class="container col-sm-offset-1 col-sm-10">
+						<div class="container">
 							<div class="row">
 								{# Génération manuelle et éclatée : #}
-								<div class="form-group bloc-obs col-sm-6">
+								
+								<div class="form-group bloc-obs col-lg-5">
 
 									{# Génération du label. #}
-									{{ form_label(form.latitude, "Latitude : ", {'label_attr': {'class': 'col-sm-10 control-label sub-title'}}) }}
+									{{ form_label(form.latitude, "Latitude : ", {'label_attr': {'class': 'col-sm-12 control-label sub-title'}}) }}
 
 									{# Affichage des erreurs pour ce champ précis. #}
 									{{ form_errors(form.latitude) }}
 
-									<div class="col-sm-10 corps">
+									<div class="col-sm-12 corps">
 										{# Génération de l'input. #}
 										{{ form_widget(form.latitude, {
 											'attr': {
@@ -100,15 +107,14 @@
 											}}) 
 										}}
 									</div>
-
 								</div>
-
+								<div class="col-lg-2"></div>
 								{# Idem pour un autre champ. #}
-								<div class="form-group bloc-obs col-sm-6">
-									{{ form_label(form.longitude, "Longitude : ", {'label_attr': {'class': 'col-sm-10 control-label sub-title'}}) }}
+								<div class="form-group bloc-obs col-lg-5">
+									{{ form_label(form.longitude, "Longitude : ", {'label_attr': {'class': 'col-sm-12 control-label sub-title'}}) }}
 									{{ form_errors(form.longitude) }}
 
-									<div class="col-sm-10 corps">
+									<div class="col-sm-12 corps">
 										{{ form_widget(form.longitude, {
 											'attr': {
 												'class': 'form-control',
@@ -121,9 +127,11 @@
 						</div>
 					</div>
 				</div>
-				<br />
-					
-				<div class="bloc-obs">
+			</div>
+			<br />
+			<div class="row" style="">		
+				<div class="col-lg-1"></div>
+				<div class="bloc-obs col-lg-10">
 					<div class="sub-title">
 						<span>Ajoutez une photo ! </span>
 					</div>
@@ -137,8 +145,10 @@
 					</div>
 					<br />
 				</div>
-				<br />
-
+			</div>
+			<br />
+			<div class="row" style="">		
+				<div class="col-lg-1"></div>
 				{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
 				{{ form_widget(form.save, {'label': 'Soumettre l\'observation', 'attr': {'class': 'btn btn-lg btn-primary'}}) }}
 
@@ -149,7 +159,7 @@
 
 				{{ form_end(form) }}
 			</div>
-			
+		</div>
 		   	
 	   
 

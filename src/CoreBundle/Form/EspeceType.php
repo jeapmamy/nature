@@ -17,12 +17,12 @@ class EspeceType extends AbstractType
     {
         $builder
             ->add('nomVern',    TextType::class, array(
-                 'attr' => array(
-                            'placeholder'=> 'Saisissez ici le nom de l\'oiseau recherché...',
-                            'data-id'=> 'listedesespeces',
-                            'data-url'=> '/nature/web/app_dev.php/autocompletion',
-					 		'label' => ' ',
-                            )));
+				'label' => false,
+				'attr' => array(
+				'placeholder'=> 'Saisissez ici le nom de l\'oiseau recherché...',
+				'data-id'=> 'listedesespeces',
+				'data-url'=> '/nature/web/app_dev.php/autocompletion',
+				)));
     }
     
     /**

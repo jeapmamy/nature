@@ -31,14 +31,14 @@ class Observation
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="decimal", precision=18, scale=12)
+     * @ORM\Column(name="latitude", type="float", precision=10, scale=6)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal", precision=18, scale=12)
+     * @ORM\Column(name="longitude", type="float", precision=10, scale=6)
      */
     private $longitude;
 
