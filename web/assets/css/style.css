@@ -6,7 +6,7 @@ header {
 	margin-bottom: 50px;
 }
 .navbar-light {
-	border-bottom: solid orange 10px;
+	border-bottom: solid #ffaf0c 10px;
 }
 #global {
 	background-color: #f1f1f1;
@@ -20,6 +20,27 @@ h2 {
 	text-align: center;
 	color: #dbb7a3;
 }
+
+a {
+	color: #005b89;
+}
+
+a:hover, a:active, a:focus {
+	color: #ffaf0c;
+}
+
+.nav {
+	height: 110px;
+}
+
+.nav-link {
+	font-size: 16px;
+}
+
+.fa-bars {
+	color: #ffaf0c;
+}
+
 
 /* MARKETING CONTENT
 -------------------- */
@@ -42,6 +63,20 @@ h2 {
 	color: #e6c0aa;
 }
 
+/* RESPONSIVE CSS
+----------------- */
+
+@media screen and (max-width: 991px) {
+	#logo {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	#monCarousel {
+		display: none;
+	}
+}
 
 /* Form Observation
  ------------------ */
@@ -108,10 +143,11 @@ h2 {
 	text-align: left;
 	*/
 }
-
+/*
 .nav-link {
 	font-size: 30px;
 }
+*/
 
 #piedBlog {
 	background-color: #e8e5e5;
