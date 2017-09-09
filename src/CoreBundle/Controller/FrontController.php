@@ -84,17 +84,30 @@ class FrontController extends Controller
      */
     public function observationAction(Request $request)
     {
+		$user = $this->getUser();
+		//$espece = $this->getEspece();
+		
 		$observation = new Observation();
+		
+		$observation->setUser($user);
+		//$observation->setEspece($espece);
+		
+		// ROLE_ADMIN, l'observation est publiée automatiquement
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $observation->setStatut(1);
+        } 
+		else {
+            $observation->setStatut(0);
+        }
+		
 		$form = $this->createForm(ObservationType::class, $observation);
 
 		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 			$em = $this->getDoctrine()->getManager();
-			//$observation->setEspece(12);
-			//$observation->setUser(1);
 			$em->persist($observation);
 			$em->flush();
 
-			$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
+			//$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
 
 			return $this->redirectToRoute('core_index');
 		}
