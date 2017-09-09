@@ -90,6 +90,7 @@ class Observation
      */
     public function setDate($date)
     {
+        $date = \DateTime::createFromFormat("d/m/Y", $date);
         $this->date = $date;
 
         return $this;

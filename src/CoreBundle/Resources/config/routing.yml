@@ -23,6 +23,8 @@ core_searchObservation:
 core_observation:
     path:     /observation
     defaults: { _controller: CoreBundle:Front:observation }
+    requirements:
+        _method: POST
 
 core_association:
     path:     /association

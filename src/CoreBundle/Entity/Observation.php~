@@ -58,8 +58,8 @@ class Observation
 	
 	/**
 	 * 
-	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Espece", inversedBy="observation", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
+	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Espece", inversedBy="observation")
+	 * @ORM\JoinColumn(name="espece_id", referencedColumnName="id")
 	 *
 	 */
 	private $espece;

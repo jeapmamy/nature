@@ -106,7 +106,7 @@ class Espece
     private $url;
 	
 	/**
-     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Observation", mappedBy="espece", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="CoreBundle\Entity\Observation", mappedBy="espece")
      */
     private $observation;
 	

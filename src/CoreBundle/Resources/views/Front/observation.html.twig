@@ -19,9 +19,9 @@
 
 {% block core_body %}			
 		
-<div class="container">
 
-		{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+<div class="container">
+		{{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'formobs'}}) }}
 
 		{# Les erreurs générales du formulaire. #}
 		{{ form_errors(form) }}
@@ -125,6 +125,7 @@
 				</div>
 			</div>
 			<br />
+
 		</div>
 	</div>
 	<br />
