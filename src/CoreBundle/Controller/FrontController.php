@@ -88,18 +88,17 @@ class FrontController extends Controller
 
 		$observation = new Observation();
 		$form = $this->createForm(ObservationType::class, $observation);
-    $espece = new Espece();
-
         //recupere l'id de l'user
-        $user = $this->getUser()->getid();
+        $user = $this->getUser();
+        
+
         //DECOMMENTER POUR VOIR LES DONNEES USER
         //var_dump($user); die();
 
 		if ($request->isXmlHttpRequest()) {
 
-            /*$form->handleRequest($request);
 
-            if ($form->isValid()) {*/
+            //if ($form->isValid()) {*/
 
                 //RECUPERATION DES DONNEES FORM AJAX
     			$date = $request->request->get('date');
@@ -107,8 +106,6 @@ class FrontController extends Controller
                 $latitude = $request->request->get('latitude');
                 $longitude = $request->request->get('longitude');
                 //FIN
-
-
                 $em = $this->getDoctrine()->getManager();
 
                 //AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION
@@ -116,7 +113,7 @@ class FrontController extends Controller
                 $observation->setLatitude($latitude);
                 $observation->setLongitude($longitude);
   
-      		// ROLE_ADMIN, l'observation est publiée automatiquement
+      		    // ROLE_ADMIN, l'observation est publiée automatiquement
                 if ($this->isGranted('ROLE_ADMIN')) {
                     $observation->setStatut(1);
                 } 
@@ -124,14 +121,14 @@ class FrontController extends Controller
                     $observation->setStatut(0);
                 }
     			
-                //BEUG SI DECOMMENTER $observation->setUser($user);
-                
+                $observation->setUser($user);
+                $RecupEspece = $em->getRepository('CoreBundle:Espece')->find($espece_id); 
+                $observation->setEspece($RecupEspece);
+       
     			$em->persist($observation);
     			$em->flush($observation);
       }
-
 			//$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
-
 			//return $this->redirectToRoute('core_index');
 		
 
