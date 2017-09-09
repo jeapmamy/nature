@@ -59,7 +59,7 @@ class Observation
 	/**
 	 * 
 	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Espece", inversedBy="observation", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
+	 * @ORM\JoinColumn(name="espece_id", referencedColumnName="ID")
 	 *
 	 */
 	private $espece;
@@ -92,6 +92,7 @@ class Observation
      */
     public function setDate($date)
     {
+        $date = \DateTime::createFromFormat("d/m/Y", $date);
         $this->date = $date;
 
         return $this;
