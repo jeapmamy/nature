@@ -42,11 +42,9 @@ class Observation
      */
     private $longitude;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     */
+	/**
+	 * @ORM\OneToOne(targetEntity="CoreBundle\Entity\Image", cascade={"persist", "remove"})
+	 */
     private $image;
 
     /**
@@ -59,7 +57,7 @@ class Observation
 	/**
 	 * 
 	 * @ORM\ManyToOne(targetEntity="CoreBundle\Entity\Espece", inversedBy="observation", cascade={"persist"})
-	 * @ORM\JoinColumn(name="espece_id", referencedColumnName="ID")
+	 * @ORM\JoinColumn(name="espece_id", referencedColumnName="ID", nullable=false)
 	 *
 	 */
 	private $espece;
@@ -163,7 +161,7 @@ class Observation
      *
      * @return Observation
      */
-    public function setImage($image)
+    public function setImage(Image $image = null)
     {
         $this->image = $image;
 

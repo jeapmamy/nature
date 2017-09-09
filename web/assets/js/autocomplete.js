@@ -73,6 +73,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         $('#url').attr("href", response[0].a_url)
     })
 
+
     //Soumission formulaire
     $("#formobs").submit(function(){
         date = $(this).find("#corebundle_observation_date").val();
@@ -90,5 +91,4 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         //alert(date + '--' + id + '--' + latitude + '--' + longitude);
 
     });
-
 })

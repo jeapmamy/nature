@@ -88,7 +88,7 @@ class FrontController extends Controller
 
 		$observation = new Observation();
 		$form = $this->createForm(ObservationType::class, $observation);
-        $espece = new Espece();
+    $espece = new Espece();
 
         //recupere l'id de l'user
         $user = $this->getUser()->getid();
@@ -108,19 +108,28 @@ class FrontController extends Controller
                 $longitude = $request->request->get('longitude');
                 //FIN
 
+
                 $em = $this->getDoctrine()->getManager();
 
                 //AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION
                 $observation->setDate($date);
                 $observation->setLatitude($latitude);
                 $observation->setLongitude($longitude);
-                $observation->setStatut(1); // VOIR POUR LE METTRE VALEUR PAR DEFAUT EN FONCTION DU TYPE DE L'USER
+  
+      		// ROLE_ADMIN, l'observation est publiée automatiquement
+                if ($this->isGranted('ROLE_ADMIN')) {
+                    $observation->setStatut(1);
+                } 
+                else {
+                    $observation->setStatut(0);
+                }
     			
                 //BEUG SI DECOMMENTER $observation->setUser($user);
                 
     			$em->persist($observation);
     			$em->flush($observation);
-            }
+      }
+
 			//$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
 
 			//return $this->redirectToRoute('core_index');
