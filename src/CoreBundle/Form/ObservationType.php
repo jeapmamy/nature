@@ -39,7 +39,7 @@ class ObservationType extends AbstractType
 				'attr'		=> array(
 					'readonly'	=> true,)
 			))
-			->add('image',		FileType::class, array(
+			->add('image',		ImageType::class, array(
 				'required'	=> false,
 			))
 			->add('save',		SubmitType::class);

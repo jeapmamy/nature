@@ -73,4 +73,22 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         $('#url').attr("href", response[0].a_url)
     })
 
+
+    //Soumission formulaire
+    $("#formobs").submit(function(){
+        date = $(this).find("#corebundle_observation_date").val();
+        latitude = $(this).find("#corebundle_observation_latitude").val();
+        longitude = $(this).find("#corebundle_observation_longitude").val();
+        
+        $.post(
+            'http://localhost/nature/web/app_dev.php/observation', 
+            {date: date, latitude: latitude, longitude: longitude, id_espece: id}, 
+            function(datae) {
+            console.log(datae);
+            }
+        );
+        return false;
+        //alert(date + '--' + id + '--' + latitude + '--' + longitude);
+
+    });
 })

@@ -5,6 +5,7 @@ namespace CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CoreBundle\Entity\Espece;
 use CoreBundle\Entity\Observation;
+use CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Form\EspeceType;
 use CoreBundle\Form\ObservationType;
@@ -84,20 +85,55 @@ class FrontController extends Controller
      */
     public function observationAction(Request $request)
     {
+
 		$observation = new Observation();
 		$form = $this->createForm(ObservationType::class, $observation);
+    $espece = new Espece();
 
-		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-			//$observation->setEspece(12);
-			//$observation->setUser(1);
-			$em->persist($observation);
-			$em->flush();
+        //recupere l'id de l'user
+        $user = $this->getUser()->getid();
+        //DECOMMENTER POUR VOIR LES DONNEES USER
+        //var_dump($user); die();
 
-			$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
+		if ($request->isXmlHttpRequest()) {
 
-			return $this->redirectToRoute('core_index');
-		}
+            /*$form->handleRequest($request);
+
+            if ($form->isValid()) {*/
+
+                //RECUPERATION DES DONNEES FORM AJAX
+    			$date = $request->request->get('date');
+                $espece_id = $request->request->get('id_espece');
+                $latitude = $request->request->get('latitude');
+                $longitude = $request->request->get('longitude');
+                //FIN
+
+
+                $em = $this->getDoctrine()->getManager();
+
+                //AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION
+                $observation->setDate($date);
+                $observation->setLatitude($latitude);
+                $observation->setLongitude($longitude);
+  
+      		// ROLE_ADMIN, l'observation est publiée automatiquement
+                if ($this->isGranted('ROLE_ADMIN')) {
+                    $observation->setStatut(1);
+                } 
+                else {
+                    $observation->setStatut(0);
+                }
+    			
+                //BEUG SI DECOMMENTER $observation->setUser($user);
+                
+    			$em->persist($observation);
+    			$em->flush($observation);
+      }
+
+			//$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
+
+			//return $this->redirectToRoute('core_index');
+		
 
 		return $this->render('CoreBundle:Front:observation.html.twig', array(
 			'form' => $form->createView(),
