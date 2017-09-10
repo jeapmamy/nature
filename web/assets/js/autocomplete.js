@@ -46,7 +46,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         }
 
         var markers = [];
-
+        var image = 'http://localhost/nature/web/assets/img/markeur/crow2.png';
         $.each(response, function(ix, obs) {
             console.log(obs);
             var marker = new google.maps.Marker({
@@ -55,6 +55,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
                     lng: obs.longitude*1
                 },
                 title: "Vu le " + obs['date'].date,
+                icon: image,
                 map: self.map
             });
             markers.push(marker);
