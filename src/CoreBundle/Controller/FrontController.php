@@ -105,7 +105,8 @@ class FrontController extends Controller
                 $espece_id = $request->request->get('id_espece');
                 $latitude = $request->request->get('latitude');
                 $longitude = $request->request->get('longitude');
-                //FIN
+                $image = $request->request->get('image');
+                
                 $em = $this->getDoctrine()->getManager();
 
                 //AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION

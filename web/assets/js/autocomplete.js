@@ -36,11 +36,20 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 
     $.get('http://localhost/nature/web/app_dev.php/obs/' + id, function(response){
         console.log(response);
-        $('#latitude').html(response[0].latitude)
+        document.getElementById('div2').style.display = 'block';
+       /* $('#latitude').html(response[0].latitude)
         $('#longitude').html(response[0].longitude)
-        $('#date').html(response[0]['date'].date)
+        $('#date').html(response[0]['date'].date)*/
 
-
+        //boucle reponse
+        //if(response.length>0) {
+            for (var i = 0; i < response.length; i++) {
+                    var ligne = $("<tr></tr>"); 
+                    ligne.append($("<td>" + response[i]['date'].date + "</td>"));
+                    ligne.append($("<td>" + response[i].username + "</td>"));
+                    $("#ob").append(ligne);
+            }
+       // }
 
         var markers = [];
 
@@ -79,10 +88,11 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         date = $(this).find("#corebundle_observation_date").val();
         latitude = $(this).find("#corebundle_observation_latitude").val();
         longitude = $(this).find("#corebundle_observation_longitude").val();
+        image = $(this).find("#corebundle_observation_image_file").val();
         
         $.post(
             'http://localhost/nature/web/app_dev.php/observation', 
-            {date: date, latitude: latitude, longitude: longitude, id_espece: id}, 
+            {date: date, latitude: latitude, longitude: longitude, id_espece: id, image: image}, 
             function(datae) {
             console.log(datae);
             }
