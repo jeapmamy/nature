@@ -16,7 +16,7 @@ class ObservationRepository extends EntityRepository
 	// Depuis un repository
 	public function mase($id)
 	{
-		$query = $this->_em->createQuery('SELECT a.date, a.latitude, a.longitude, a.statut, u.id, u.username FROM CoreBundle:Observation a JOIN CoreBundle:User u WHERE a.espece = :id AND a.statut = 1');
+		$query = $this->_em->createQuery('SELECT a.date, a.latitude, a.longitude, a.statut, u.id, u.username FROM CoreBundle:Observation a JOIN CoreBundle:User u WHERE a.espece = :id AND a.statut = 1 AND a.user = u.id');
 	 	//$query->andWhere(u.id = a.user_id);
 		$query->setParameter('id', $id);
 
