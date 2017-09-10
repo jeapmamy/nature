@@ -37,19 +37,13 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
     $.get('http://localhost/nature/web/app_dev.php/obs/' + id, function(response){
         console.log(response);
         document.getElementById('div2').style.display = 'block';
-       /* $('#latitude').html(response[0].latitude)
-        $('#longitude').html(response[0].longitude)
-        $('#date').html(response[0]['date'].date)*/
 
-        //boucle reponse
-        //if(response.length>0) {
-            for (var i = 0; i < response.length; i++) {
-                    var ligne = $("<tr></tr>"); 
-                    ligne.append($("<td>" + response[i]['date'].date + "</td>"));
-                    ligne.append($("<td>" + response[i].username + "</td>"));
-                    $("#ob").append(ligne);
-            }
-       // }
+        for (var i = 0; i < response.length; i++) {
+                var ligne = $("<tr></tr>"); 
+                ligne.append($("<td>" + response[i]['date'].date + "</td>"));
+                ligne.append($("<td>" + response[i].username + "</td>"));
+                $("#ob").append(ligne);
+        }
 
         var markers = [];
 
@@ -60,6 +54,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
                     lat: obs.latitude*1,
                     lng: obs.longitude*1
                 },
+                title: "Vu le " + obs['date'].date,
                 map: self.map
             });
             markers.push(marker);
