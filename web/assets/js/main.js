@@ -48,5 +48,11 @@ $( function() {
 		minDate: new Date(2017, 1 - 1, 1),
 		maxDate: "+0d"
 	});
+	
+	/* Bouton FOOTER
+	---------------- */	
+	$("#monBouton").click(function(){
+    	$("html, body").animate({scrollTop: 0},"slow");
+    });
 
 } );
