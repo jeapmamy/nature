@@ -15,9 +15,56 @@
 {% block core_body %}
 	<div class="well">
 		<h2></h2>
-
-
+		{{ form_start(form) }}
+		<div class="row">
+			<div class="col-lg-2 col-lg-offset-1">
+				{{ form_label(form.nom, "Nom ") }}
+				{{ form_errors(form.nom) }}
+			</div>
+			<div class="col-lg-8">
+				{{ form_widget(form.nom) }}
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-lg-2 col-lg-offset-1">
+				{{ form_label(form.prenom, "Prénom ") }}
+				{{ form_errors(form.prenom) }}
+			</div>
+			<div class="col-lg-8">
+				{{ form_widget(form.prenom) }}
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-lg-2 col-lg-offset-1">
+				{{ form_label(form.email, "Email ") }}
+				{{ form_errors(form.email) }}
+			</div>
+			<div class="col-lg-8">
+				{{ form_widget(form.email) }}
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-lg-2 col-lg-offset-1">
+				{{ form_label(form.message, "Message ") }}
+				{{ form_errors(form.message) }}
+			</div>
+			<div class="col-lg-8">
+				{{ form_widget(form.message) }}
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-lg-3 col-lg-offset-3">
+				{{ form_widget(form.envoyer, {'label': 'Envoyer', 'attr': {'class': 'btn btn-lg btn-primary'}}) }}
+			</div>
+		</div>
+		
+		{{ form_end(form) }}
 
 	</div>
+	<br /><br />
 {% endblock %}
 

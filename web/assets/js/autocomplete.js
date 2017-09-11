@@ -49,7 +49,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         for (var i = 0; i < response.length; i++) {
                 var ligne = $("<tr></tr>"); 
                 var date = new Date(response[i]['date'].date);
-                var dateString = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+				var dateString = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
 
                 ligne.append($("<td>" + dateString + "</td>"));
                 ligne.append($("<td>" + response[i].username + "</td>"));

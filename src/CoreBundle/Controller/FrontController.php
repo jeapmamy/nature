@@ -8,6 +8,7 @@ use CoreBundle\Entity\Observation;
 use CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Form\EspeceType;
+use CoreBundle\Form\ContactType;
 use CoreBundle\Form\ObservationType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -100,38 +101,47 @@ class FrontController extends Controller
 
             //if ($form->isValid()) {*/
 
-                //RECUPERATION DES DONNEES FORM AJAX
-    			$date = $request->request->get('date');
-                $espece_id = $request->request->get('id_espece');
-                $latitude = $request->request->get('latitude');
-                $longitude = $request->request->get('longitude');
-                $image = $request->request->get('image');
-                
-                $em = $this->getDoctrine()->getManager();
+			//RECUPERATION DES DONNEES FORM AJAX
+			$date = $request->request->get('date');
+			$espece_id = $request->request->get('id_espece');
+			$latitude = $request->request->get('latitude');
+			$longitude = $request->request->get('longitude');
+			$image = $request->request->get('image');
 
-                //AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION
-                $observation->setDate($date);
-                $observation->setLatitude($latitude);
-                $observation->setLongitude($longitude);
-  
-      		    // ROLE_ADMIN, l'observation est publiée automatiquement
-                if ($this->isGranted('ROLE_ADMIN')) {
-                    $observation->setStatut(1);
-                } 
-                else {
-                    $observation->setStatut(0);
-                }
-    			
-                $observation->setUser($user);
-                $RecupEspece = $em->getRepository('CoreBundle:Espece')->find($espece_id); 
-                $observation->setEspece($RecupEspece);
-       
-    			$em->persist($observation);
-    			$em->flush($observation);
-      }
-			//$request->getSession()->getFlashBag()->add('info', 'Observation bien enregistrée.');
-			//return $this->redirectToRoute('core_index');
+			$em = $this->getDoctrine()->getManager();
+
+			//AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION
+			$observation->setDate($date);
+			$observation->setLatitude($latitude);
+			$observation->setLongitude($longitude);
+
+			// ROLE_ADMIN, l'observation est publiée automatiquement
+			if ($this->isGranted('ROLE_ADMIN')) {
+				$observation->setStatut(1);
+			} 
+			else {
+				$observation->setStatut(0);
+			}
+
+			$observation->setUser($user);
+			$RecupEspece = $em->getRepository('CoreBundle:Espece')->find($espece_id); 
+			$observation->setEspece($RecupEspece);
+
+			$em->persist($observation);
+			$em->flush($observation);
+
+			/*
+			if ($observation->getStatut() === 1) {
+				$this->addFlash('success', 'Votre observation a bien été enregistrée.');
+			} 
+			elseif ($observation->getStatut() === 0){
+				$this->addFlash('info', 'Votre observation a été enregistrée, elle est en attente de validation.');
+			}
+			*/
 		
+			return $this->redirectToRoute("core_index");		
+
+		}
 
 		return $this->render('CoreBundle:Front:observation.html.twig', array(
 			'form' => $form->createView(),
@@ -151,9 +161,35 @@ class FrontController extends Controller
     }
 	
 	//Page Contact
-    public function contactAction()
+    public function contactAction(Request $request)
     {
-        return $this->render('CoreBundle:Front:contact.html.twig');
+		$form = $this->createForm(ContactType::class);
+		
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+			
+			$data = $form->getData();
+			
+			$message = (new \Swift_Message())
+				->setSubject($data['email']. '- Message de : ' .$data['nom']. ' ' .$data['prenom'])
+				->setFrom($data['email'])
+				->setTo(['contact.nao2017@gmail.com' => 'Association NAO'])
+				->setBody($form->getData()['message'],
+					'text/plain'
+				);
+			
+			$this->get('mailer')->send($message);
+				
+			$this->addFlash('success', 'Votre message a été envoyé avec succes.');
+			
+			return $this->redirectToRoute("core_index");
+	
+        }
+		
+		return $this->render('CoreBundle:Front:contact.html.twig', array(
+			'form' => $form->createView(),
+		));
+       
     }
+        
 	
 }

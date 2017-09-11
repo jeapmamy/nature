@@ -15,6 +15,16 @@
 	</div>
 
 	<hr>
+
+	{% if app.request.hasPreviousSession %}
+		{% for type, messages in app.session.flashbag.all() %}
+			{% for message in messages %}
+				<div class="alert alert-{{ type }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
 	
 
 	{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
