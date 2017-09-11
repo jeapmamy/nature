@@ -1,4 +1,4 @@
-
+var self = this; //Sauvegarde le contexte global
 
 $("input[data-id=listedesespeces]").autocomplete({
     source: function (request, response) {
@@ -25,9 +25,17 @@ $("input[data-id=listedesespeces]").autocomplete({
         });
     }
 })
-
+this.markers = [];
 $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) {
     event.preventDefault();
+    //vide le tableau
+    for (var i = 0; i < self.markers.length; i++) {
+        self.markers[i].setMap(null);
+    }
+    self.markers = [];
+    $("#ob").html('');
+
+
     var contact = ui.item.label;
         id = ui.item.value;
     console.log('Event: ', event);
@@ -40,12 +48,14 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 
         for (var i = 0; i < response.length; i++) {
                 var ligne = $("<tr></tr>"); 
-                ligne.append($("<td>" + response[i]['date'].date + "</td>"));
+                var date = new Date(response[i]['date'].date);
+                var dateString = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+
+                ligne.append($("<td>" + dateString + "</td>"));
                 ligne.append($("<td>" + response[i].username + "</td>"));
                 $("#ob").append(ligne);
         }
 
-        var markers = [];
         var image = 'http://localhost/nature/web/assets/img/markeur/crow2.png';
         $.each(response, function(ix, obs) {
             console.log(obs);
@@ -58,7 +68,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
                 icon: image,
                 map: self.map
             });
-            markers.push(marker);
+            self.markers.push(marker);
         });
     })
 
@@ -90,7 +100,9 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
             'http://localhost/nature/web/app_dev.php/observation', 
             {date: date, latitude: latitude, longitude: longitude, id_espece: id, image: image}, 
             function(datae) {
-            console.log(datae);
+                //vide le formulaire + message de confirmation
+                location.reload();
+
             }
         );
         return false;
