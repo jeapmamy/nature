@@ -8,7 +8,7 @@
 
 
 {% block titlepage %}
-<h2>Faire une recherche</h2>
+<h1 style="text-align: center;">Faire une recherche</h1>
 <style>
 	#map {
 		height: 300px;
@@ -19,10 +19,9 @@
 
 
 {% block core_body %}
-<div class="container">
+<div class="well">
 	<div class="row">
-		<div class="col-lg-1"></div>
-		<div class="bloc-obs col-lg-10">
+		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
 				<span>Recherche</span>
 			</div>
@@ -44,66 +43,47 @@
 
 
 	<div class="row">
-		<div class="col-lg-1"></div>
-		<div class="bloc-obs col-lg-10">
+		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
 				<span>Fiche de l'espèce</span>
 			</div>
 
 			<div class="corps">
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Nom latin de l'espèce</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="lbnom"></p>
+					<p class="col-lg-5 col-lg-offset-1">Nom latin de l'espèce</p>
+					<p class="col-lg-5 col-lg-offset-1" id="lbnom"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Auteur</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="lbauteur"></p>
+					<p class="col-lg-5 col-lg-offset-1">Auteur</p>
+					<p class="col-lg-5 col-lg-offset-1" id="lbauteur"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Nom vernaculaire (FR)</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="lbnomvern"></p>
+					<p class="col-lg-5 col-lg-offset-1">Nom vernaculaire (FR)</p>
+					<p class="col-lg-5 col-lg-offset-1" id="lbnomvern"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Nom vernaculaire (ENG)</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="nomVernEng"></p>
+					<p class="col-lg-5 col-lg-offset-1">Nom vernaculaire (ENG)</p>
+					<p class="col-lg-5 col-lg-offset-1" id="nomVernEng"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Famille</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="famille"></p>
+					<p class="col-lg-5 col-lg-offset-1">Famille</p>
+					<p class="col-lg-5 col-lg-offset-1" id="famille"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Phylum</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="phylum"></p>
+					<p class="col-lg-5 col-lg-offset-1">Phylum</p>
+					<p class="col-lg-5 col-lg-offset-1" id="phylum"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Classe</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="classe"></p>
+					<p class="col-lg-5 col-lg-offset-1">Classe</p>
+					<p class="col-lg-5 col-lg-offset-1" id="classe"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Ordre</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id="ordre"></p>
+					<p class="col-lg-5 col-lg-offset-1">Ordre</p>
+					<p class="col-lg-5 col-lg-offset-1" id="ordre"></p>
 				</div>
 				<div class="row">
-					<div class="col-lg-1"></div>
-					<h6 class="col-lg-5">Lien fiche INPN</h6>
-					<div class="col-lg-1"></div>
-					<p class="col-lg-5" id=""><a id = 'url' href= "" target="_blank"></a></p>
+					<p class="col-lg-5 col-lg-offset-1">Lien fiche INPN</p>
+					<p class="col-lg-5 col-lg-offset-1" id=""><a id = 'url' href= "" target="_blank"></a></p>
 				</div>
 			</div>
 		</div>
@@ -111,8 +91,7 @@
 	<br />
 
 	<div class="row" style="">
-		<div class="col-lg-1"></div>
-		<div class="bloc-obs col-lg-10">
+		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
 				<span>Carte</span>
 			</div>
@@ -127,8 +106,7 @@
 	 
     
 	<div class="row" id="div2" style="display:none;">
-		<div class="col-lg-1"></div>
-		<div class="bloc-obs col-lg-10">
+		<div class="col-lg-10 col-lg-offset-1">
 			<div class="table-style2">
 				<div class="sub-title">
 					<span>Les observations de l'espèce</span>
