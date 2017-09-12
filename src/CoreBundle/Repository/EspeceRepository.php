@@ -39,4 +39,18 @@ class EspeceRepository extends EntityRepository
          ->getScalarResult();
        return $select;
     }
+	
+	public function getEspeceWithObservation()
+	{
+		$qb = $this
+			->createQueryBuilder('e')
+			->leftJoin('e.observation', 'observ')
+			->addSelect('observ')
+		;
+
+		return $qb
+			->getQuery()
+			->getResult()
+		;
+	}
 }

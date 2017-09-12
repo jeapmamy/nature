@@ -24,5 +24,24 @@ class ObservationRepository extends EntityRepository
 
 		return $results;
 	}
+	
+	public function myFindBy()
+	{
+		
+		$qb = $this
+			->createQueryBuilder('o')
+		;		
+
+		$qb->where('o.statut = 0')
+			->orderBy('o.date', 'DESC')
+		;
+
+		return $qb
+			->getQuery()
+			->getResult()
+		;
+	}
+	
+	
 
 }

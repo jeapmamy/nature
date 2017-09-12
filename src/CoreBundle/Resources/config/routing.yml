@@ -41,3 +41,27 @@ core_contact:
 core_admin:
     path:     /admin
     defaults: { _controller: CoreBundle:Back:admin }
+
+core_valide_nat:
+    path: /valide_nat/{id}
+    defaults: { _controller:CoreBundle:Back:valideNat }
+    requirements:
+        id: \d+
+
+core_refuse_nat:
+    path: /refuse_nat/{id}
+    defaults: { _controller:CoreBundle:Back:refuseNat }
+    requirements:
+        id: \d+
+
+core_valide_obs:
+    path: /valide_obs/{id}
+    defaults: { _controller:CoreBundle:Back:valideObs }
+    requirements:
+        id: \d+
+
+core_delete_obs:
+    path: /delete_obs/{id}
+    defaults: { _controller:CoreBundle:Back:deleteObs }
+    requirements:
+        id: \d+
