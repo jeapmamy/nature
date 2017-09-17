@@ -30,7 +30,7 @@ class ObservationType extends AbstractType
 					'class' 	=> 'form-control input-inline',
 					'readonly' 	=> true,)
 			))
-      		->add('espece',    EspeceType::class, array('data_class' => null))
+      		//->add('espece',    EspeceType::class, array('data_class' => null))
 			->add('latitude',	NumberType::class, array(
 				'attr'		=> array(
 					'readonly'	=> true,)

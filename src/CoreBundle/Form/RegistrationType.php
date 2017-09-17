@@ -10,7 +10,8 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('pro');
+        $builder
+			->add('pro');
     }
 
     public function getParent()

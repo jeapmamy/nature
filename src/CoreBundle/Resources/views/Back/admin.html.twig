@@ -28,24 +28,39 @@
 						<table class="table table-bordered table-2 table-striped">
 							<thead>
 								<tr>
-									<td class="col-lg-2">Date</td>									
+									<td class="col-lg-1">Date</td>
+									<td class="col-lg-1">Pseudo</td>
+									<td class="col-lg-1">Latitude</td>
+									<td class="col-lg-1">Longitude</td>
 									<td class="col-lg-4">Espèce</td>
 									<td class="col-lg-2">Image</td>
-									<td class="col-lg-2">Actions</td>
-									<td class="col-lg-2"></td>
+									<td class="col-lg-1" align="center">Publier</td>
+									<td class="col-lg-1" align="center">Effacer</td>
 								</tr>
 							</thead>
 							<tbody>
 								{% for obs in listObs %}
 								<tr>
 									<td>{{ obs.date|date('d/m/Y') }}</td>
-									<td>{{ obs.espece.nomVern }}, {{ obs.espece.lbAuteur }}</td>
 									<td>{{ obs.user.username }}</td>
+									<td>{{ obs.latitude }}</td>
+									<td>{{ obs.longitude }}</td>
+									<td>{{ obs.espece.nomVern }}, {{ obs.espece.lbAuteur }}</td>
 									<td>
-										<a href="{{ path('core_valide_obs', {'id' : obs.id}) }}" class="btn btn-primary">Publier</a>
+										{# On vérifie qu'une image soit bien associée à l'article #}
+										{% if obs.image is not null %}
+											<img
+												src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+												alt="{{ obs.image.alt }}"
+												height=100
+											/>
+										{% endif %}
 									</td>
-									<td>
-										<a href="{{ path('core_delete_obs', {'id' : obs.id}) }}" class="btn btn-danger">Effacer</a>
+									<td align="center">
+										<a href="{{ path('core_valide_obs', {'id' : obs.id}) }}"><i class="fa fa-check-square-o fa-2x"></i></a>
+									</td>
+									<td align="center">
+										<a href="{{ path('core_delete_obs', {'id' : obs.id}) }}" Onclick ="if(window.confirm('Voulez-vous vraiment effacer cette observation ?')){return true;}else{return false;}"><i class="fa fa-trash fa-2x"></i></a>
 									</td>
 								</tr>
 								{% endfor %}
@@ -59,7 +74,7 @@
 		<!-- Affiche la liste des demandes "Naturaliste"
 		================================================ -->
 		<div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8 col-lg-offset-2">
                 <div class="sub-title">
                 	<span>Liste des demandes de statut "Naturaliste"</span>
               	</div>
@@ -68,10 +83,10 @@
 						<table class="table table-bordered table-2 table-striped">
 							<thead>
 								<tr>
-									<td class="col-lg-4">Pseudo</td>									
+									<td class="col-lg-2">Pseudo</td>									
 									<td class="col-lg-4">Email</td>
-									<td class="col-lg-2">Actions</td>
-									<td class="col-lg-2"></td>
+									<td class="col-lg-1" align="center">Accepter</td>
+									<td class="col-lg-1" align="center">Refuser</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -79,11 +94,11 @@
 								<tr>
 									<td>{{ nat.username }}</td>
 									<td>{{ nat.email }}</td>
-									<td>
-										<a href="{{ path('core_valide_nat', {'id' : nat.id}) }}" class="btn btn-success">Accepter</a>
+									<td align="center">
+										<a href="{{ path('core_valide_nat', {'id' : nat.id}) }}"><i class="fa fa-check-square-o fa-2x"></i></a>
 									</td>
-									<td>
-										<a href="{{ path('core_valide_nat', {'id' : nat.id}) }}" class="btn btn-danger">Refuser</a>
+									<td align="center">
+										<a href="{{ path('core_valide_nat', {'id' : nat.id}) }}"><i class="fa fa-ban fa-2x"></i></a>
 									</td>
 								</tr>
 								{% endfor %}

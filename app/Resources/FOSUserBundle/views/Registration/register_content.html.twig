@@ -1,16 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h1>Créer un compte NAO</h1>
-
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-{{ form_end(form) }}
-
-
-	<div class="col-sm-5">
+	<div class="col-lg-6 col-lg-offset-3">
                         	
 		<div class="form-box">
 			<div class="form-top">
@@ -23,26 +13,13 @@
 				</div>
 			</div>
 			<div class="form-bottom">
-				<form role="form" action="" method="post" class="registration-form">
-					<div class="form-group">
-						<label class="sr-only" for="form-first-name">First name</label>
-						<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+				{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+					{{ form_label(form) }}
+					{{ form_widget(form) }}
+					<div>
+						<input class="btn btn-primary col-lg-4 col-lg-offset-2" type="submit" value="{{ 'registration.submit'|trans }}" />
 					</div>
-					<div class="form-group">
-						<label class="sr-only" for="form-last-name">Last name</label>
-						<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
-					</div>
-					<div class="form-group">
-						<label class="sr-only" for="form-email">Email</label>
-						<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-					</div>
-					<div class="form-group">
-						<label class="sr-only" for="form-about-yourself">About yourself</label>
-						<textarea name="form-about-yourself" placeholder="About yourself..." 
-									class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-					</div>
-					<button type="submit" class="btn">Sign me up!</button>
-				</form>
+				{{ form_end(form) }}
 			</div>
 		</div>
 

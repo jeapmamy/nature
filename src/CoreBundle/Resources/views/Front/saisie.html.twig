@@ -1,0 +1,222 @@
+{# src/CoreBundle/Resources/views/Front/saisie.html.twig #}
+
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}
+	Saisie observation - {{ parent() }}
+{% endblock %}
+
+{% block titlepage %}
+<h1 style="text-align: center;">Ajouter une observation</h1>
+<style>
+	#map {
+		height: 300px;
+		width: 100%;
+	}
+</style>
+{% endblock %}
+
+
+{% block core_body %}			
+		
+
+<div class="well">
+		{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+		{# Les erreurs générales du formulaire. #}
+		{{ form_errors(form) }}
+	<div class="row" style="">	
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>L'Oiseau</span>
+			</div>
+
+			<div class="corps">
+				<h2>
+					{{ espece.nomVern }}, {{ espece.lbAuteur }}
+				</h2>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row" style="">	
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>Quand ?</span>
+			</div>
+
+			<div class="corps form-group" id="dateObs">
+				{{ form_label(form.date, "Date : ", {'label_attr': {'class': 'col-lg-3 control-label'}}) }}
+				{{ form_errors(form.date) }}
+
+				<div class="col-lg-3">
+					{{ form_widget(form.date, {'attr': {'class': 'form-control-lg'}}) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row" style="">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>Où ?</span>
+			</div>
+			
+			<div class="col-lg-6">
+				<p>Si vous avez autorisé la géolocalisation, vous pouvez :</p>
+				<ul>
+					<li>soit laisser les latitude et longitude de votre géolocalisation</li>
+					<li>soit sélectionner un autre endroit sur la carte
+				</ul>
+			</div>
+			<div class="col-lg-6">
+				<p>Si vous n'avez pas autorisé la géolocalisation, vous devez :</p>
+				<ul>
+					<li>sélectionner un endroit sur la carte</li>
+				</ul>
+			</div>
+
+			<div class="col-lg-12" id="map" style=""></div>
+			
+			<br /><br />
+
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="latlng col-lg-5">
+						<div class="sub-title">
+							<span>Latitude : </span>
+						</div>
+						{{ form_errors(form.latitude) }}
+						<div class="corps form-group">
+							{# Génération de l'input. #}
+							{{ form_widget(form.latitude, {
+								'attr': {
+									'class': 'form-control-lg',
+									'placeholder': 'Cliquez sur la carte...',
+								}}) 
+							}}
+						</div>
+					</div>
+					<div class="latlng col-lg-5 col-lg-offset-2">
+						<div class="sub-title">
+							<span>Longitude : </span>
+						</div>
+						{{ form_errors(form.longitude) }}
+
+						<div class="corps form-group">
+							{{ form_widget(form.longitude, {
+								'attr': {
+									'class': 'form-control form-control-lg',
+									'placeholder': 'Cliquez sur la carte...',
+								}}) 
+							}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row" style="">		
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>Ajoutez une photo ! </span>
+			</div>
+			<div class="corps form-group">
+				{{ form_label(form.image, "Image : ", {'label_attr': {'class': 'col-lg-3 control-label'}}) }}
+				{{ form_errors(form.image) }}
+
+				<div class="col-lg-3">
+					{{ form_widget(form.image, {'attr': {'class': 'form-control-file'}}) }}
+				</div>
+			</div>
+			<br />
+
+		</div>
+	</div>
+	<br />
+	<div class="row" style="">		
+		<div class="col-lg-10 col-lg-offset-1">
+		{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+		{{ form_widget(form.save, {'label': 'Soumettre l\'observation', 'attr': {'class': 'btn btn-lg btn-primary'}}) }}
+
+		{# Génération automatique des champs pas encore écrits.
+			Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+			et tous les champs cachés (type « hidden »). #}
+		{{ form_rest(form) }}
+
+		{{ form_end(form) }}
+		</div>
+	</div>
+</div>
+
+
+
+
+<br /><hr>
+
+<script>
+	var self = this;
+	function initMap(){
+		self.map = new google.maps.Map($('#map')[0], {
+		center: new google.maps.LatLng(46.606111,1.845278),
+		zoom: 5,
+		});
+		var infoWindow = new google.maps.InfoWindow({
+			map: map
+		});
+
+		// Try HTML5 geolocation.
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				map.setCenter(pos);
+				// Ajout d'un marqueur
+				var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+				var beachMarker = new google.maps.Marker({
+					position: pos,
+					map: map,
+					icon: image,
+					title: 'Votre position géolocalisée'
+				});
+				document.getElementById("corebundle_observation_latitude").value = position.coords.latitude;
+				document.getElementById("corebundle_observation_longitude").value = position.coords.longitude;
+
+			}, function() {
+				handleLocationError(true, infoWindow, map.getCenter());
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			handleLocationError(false, infoWindow, map.getCenter());
+
+		}
+
+		google.maps.event.addListener(map, 'click', function(event) {
+			placeMarker(event.latLng);
+		  });
+
+		var marker;
+		function placeMarker(location) {
+		  if(marker){ //on vérifie si le marqueur existe
+			marker.setPosition(location); //on change sa position
+		  }else{
+			var image = 'http://localhost/nature/web/assets/img/markeur/crow2.png';
+			marker = new google.maps.Marker({ //on créé le marqueur
+			  position: location,
+			  map: map,
+			  icon: image,
+			  title: 'Votre nouveau choix'
+			});
+		  }
+		  document.getElementById("corebundle_observation_latitude").value=location.lat();
+		  document.getElementById("corebundle_observation_longitude").value=location.lng();
+		}
+	}
+</script>
+
+{% endblock %}
+
+

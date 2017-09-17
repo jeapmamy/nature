@@ -3,6 +3,7 @@
 namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Observation
@@ -25,25 +26,29 @@ class Observation
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
+	 * @Assert\NotBlank(message="Veuillez sélectionner une date")
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="latitude", type="float", precision=10, scale=6)
+     * @ORM\Column(name="latitude", type="decimal", precision=10, scale=6)
+	 * @Assert\NotBlank(message="Veuillez sélectionner un endroit sur la carte")
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="float", precision=10, scale=6)
+     * @ORM\Column(name="longitude", type="decimal", precision=10, scale=6)
+	 * @Assert\NotBlank(message="Veuillez sélectionner un endroit sur la carte")
      */
     private $longitude;
 
 	/**
 	 * @ORM\OneToOne(targetEntity="CoreBundle\Entity\Image", cascade={"persist", "remove"})
+	 * @Assert\Valid()
 	 */
     private $image;
 
@@ -90,7 +95,7 @@ class Observation
      */
     public function setDate($date)
     {
-        $date = \DateTime::createFromFormat("d/m/Y", $date);
+        //$date = \DateTime::createFromFormat("d/m/Y", $date);
         $this->date = $date;
 
         return $this;

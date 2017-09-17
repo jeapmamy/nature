@@ -73,7 +73,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
     })
 
     $.get('http://localhost/nature/web/app_dev.php/rechercher/' + id, function(response){
-        //console.log(response);
+        //console.log(response[0]);
         $('#lbnomvern').html(response[0].a_nomVern)
         $('#lbauteur').html(response[0].a_lbAuteur)
         $('#famille').html(response[0].a_famille)
@@ -86,27 +86,20 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         $('#phylum').html(response[0].a_phylum)
         $('#url').html(response[0].a_url)
         $('#url').attr("href", response[0].a_url)
+		$('#idEspece').html(response[0].a_id)
     })
+	
 
 
-    //Soumission formulaire
-    $("#formobs").submit(function(){
-        date = $(this).find("#corebundle_observation_date").val();
-        latitude = $(this).find("#corebundle_observation_latitude").val();
-        longitude = $(this).find("#corebundle_observation_longitude").val();
-        image = $(this).find("#corebundle_observation_image_file").val();
-        
-        $.post(
-            'http://localhost/nature/web/app_dev.php/observation', 
-            {date: date, latitude: latitude, longitude: longitude, id_espece: id, image: image}, 
-            function(datae) {
-                //vide le formulaire + message de confirmation
-                location.reload();
+	//Soumission formulaire
+	$("#formobs").click(function(){
+		
+		document.location.href="http://localhost/nature/web/app_dev.php/saisie/" + id ;
+		//window.location="http://localhost/nature/web/app_dev.php/";
+		
+		return false;
+		//alert(date + '--' + id + '--' + latitude + '--' + longitude);
 
-            }
-        );
-        return false;
-        //alert(date + '--' + id + '--' + latitude + '--' + longitude);
+	});
 
-    });
-})
+})		

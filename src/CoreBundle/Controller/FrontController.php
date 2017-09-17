@@ -79,74 +79,75 @@ class FrontController extends Controller
         }
     }
 
-	
-//Page Observation
+//Page recherche pour observation
 	/**
      *@Security("has_role('ROLE_USER')")
      */
     public function observationAction(Request $request)
     {
-
+        $Espece = new Espece();
+        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+		
+		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+			
+			return $this->redirectToRoute('core_obssaisie', array('id' => id));
+		}
+		
+        return $this->render('CoreBundle:Front:observation.html.twig',
+            array(
+           'form' => $form->createView(),
+           )
+        );
+    }
+	
+//Page Observation
+	/**
+     *@Security("has_role('ROLE_USER')")
+     */
+    public function saisieAction(Request $request, $id)
+    {
 		$observation = new Observation();
 		$form = $this->createForm(ObservationType::class, $observation);
         //recupere l'id de l'user
         $user = $this->getUser();
+		
+		$em = $this->getDoctrine()->getManager();
+   
+		$espece = $em->getRepository('CoreBundle:Espece')->find($id);
         
-
-        //DECOMMENTER POUR VOIR LES DONNEES USER
-        //var_dump($user); die();
-
-		if ($request->isXmlHttpRequest()) {
-
-
-            //if ($form->isValid()) {*/
-
-			//RECUPERATION DES DONNEES FORM AJAX
-			$date = $request->request->get('date');
-			$espece_id = $request->request->get('id_espece');
-			$latitude = $request->request->get('latitude');
-			$longitude = $request->request->get('longitude');
-			$image = $request->request->get('image');
-
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            
 			$em = $this->getDoctrine()->getManager();
-
-			//AJOUT DES DONNEES A UNE NOUVELLE INSTANCE OBSERVATION
-			$observation->setDate($date);
-			$observation->setLatitude($latitude);
-			$observation->setLongitude($longitude);
-
-			// ROLE_ADMIN, l'observation est publiée automatiquement
+			
 			if ($this->isGranted('ROLE_ADMIN')) {
 				$observation->setStatut(1);
 			} 
 			else {
 				$observation->setStatut(0);
 			}
-
+			
 			$observation->setUser($user);
-			$RecupEspece = $em->getRepository('CoreBundle:Espece')->find($espece_id); 
-			$observation->setEspece($RecupEspece);
-
+			//$RecupEspece = $em->getRepository('CoreBundle:Espece')->find($id); 
+			$observation->setEspece($espece);
 			$em->persist($observation);
 			$em->flush($observation);
-
-			/*
+			
 			if ($observation->getStatut() === 1) {
 				$this->addFlash('success', 'Votre observation a bien été enregistrée.');
 			} 
 			elseif ($observation->getStatut() === 0){
 				$this->addFlash('info', 'Votre observation a été enregistrée, elle est en attente de validation.');
 			}
-			*/
-		
-			return $this->redirectToRoute("core_index");		
-
+			
+			return $this->redirectToRoute("core_observation");
+			
 		}
-
-		return $this->render('CoreBundle:Front:observation.html.twig', array(
+		return $this->render('CoreBundle:Front:saisie.html.twig', array(
+			'espece' => $espece,
 			'form' => $form->createView(),
 		));
     }
+	
 	
 	//Page Association
     public function associationAction()

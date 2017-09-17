@@ -5,6 +5,7 @@ namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -15,24 +16,31 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Image
 {
 	/**
-	* @ORM\Column(name="id", type="integer")
-	* @ORM\Id
-	* @ORM\GeneratedValue(strategy="AUTO")
-	*/
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
 	private $id;
 
 	/**
-	* @ORM\Column(name="url", type="string", length=255)
-	*/
+	 * @ORM\Column(name="url", type="string", length=255)
+	 */
 	private $url;
 
 	/**
-	* @ORM\Column(name="alt", type="string", length=255)
-	*/
+	 * @ORM\Column(name="alt", type="string", length=255)
+	 */
 	private $alt;
 	
 	/**
      * @var UploadedFile
+	 *
+	 * @Assert\File(
+     *      mimeTypes={"image/png", "image/jpeg", "image/jpg"},
+     *      mimeTypesMessage = "La photo doit être au format PNG, JPEG ou JPG",
+     *      maxSize = "2M",
+	 *		maxSizeMessage = "La photo doit être inférieure à 2Mo"
+     * )
      */
 	private $file;
 	
