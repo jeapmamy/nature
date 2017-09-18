@@ -1,0 +1,44 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #} 
+
+{% extends "CoreBundle::layout.html.twig" %} 
+
+{% block title %} 
+	Erreur404 - {{ parent() }} 
+{% endblock %} 
+
+
+
+{% block core_body %}
+
+<div class="well">
+
+	<div class="row">
+		<div class="col-lg-6">
+			<img src="{{asset('assets/img/oiseaux1.jpg')}}" />
+		</div>
+		<div class="col-lg-6">
+
+			<h3>Désolé !</h3>
+			<br />
+			<div class="erreur">
+				<h4>La page que vous recherchez est introuvable.</h4>
+				
+				<h4>Notre application a retourné une erreur {{ status_code }} : {{ status_text }}.</h4>
+				<br />
+				<h4>Nous avons mis nos meilleurs éléments sur l'affaire.</h4>
+			</div>
+			<br />
+			<hr>
+			<br />
+			<div>
+				<a href="{{ path('core_index') }}" class="btn btn-warning">
+				 Retour à l'Accueil
+				</a>
+			</div>
+
+		</div>
+	</div>
+	
+</div>
+
+{% endblock %}

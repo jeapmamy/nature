@@ -49,11 +49,42 @@
 									<td>
 										{# On vérifie qu'une image soit bien associée à l'article #}
 										{% if obs.image is not null %}
-											<img
-												src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
-												alt="{{ obs.image.alt }}"
-												height=100
-											/>
+											<div class="modal fade" id="myModal{{ obs.image.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+															<h4 class="modal-title">Titre de la modale</h4>
+														</div>
+														<div class="modal-body">
+															<div class="container-fluid">
+																<div class="row">
+																	<div class="col-lg-12">
+																		<p>Corps de la modale</p>
+																		<img
+																			src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+																			alt="{{ obs.image.alt }}"
+																			class="col-lg-12"
+																		/>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<!--<button class="btn btn-primary" type="button"><i class="icon icon-check icon-lg"></i> Valide</button>-->
+															<button class="btn btn-warning" type="button" data-dismiss="modal">Fermer</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<a data-toggle="modal" href="#myModal{{ obs.image.id }}">
+												<img
+													src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+													alt="{{ obs.image.alt }}"
+													title="Cliquez pour agrandir l'image"
+													height=100
+												/>
+											</a>
 										{% endif %}
 									</td>
 									<td align="center">
@@ -98,7 +129,7 @@
 										<a href="{{ path('core_valide_nat', {'id' : nat.id}) }}"><i class="fa fa-check-square-o fa-2x"></i></a>
 									</td>
 									<td align="center">
-										<a href="{{ path('core_valide_nat', {'id' : nat.id}) }}"><i class="fa fa-ban fa-2x"></i></a>
+										<a href="{{ path('core_refuse_nat', {'id' : nat.id}) }}"><i class="fa fa-ban fa-2x"></i></a>
 									</td>
 								</tr>
 								{% endfor %}
@@ -110,6 +141,9 @@
 		</div>
 
 	</div>
+	
+	
+	
 {% endblock %}
 
 

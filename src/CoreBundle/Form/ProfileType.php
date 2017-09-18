@@ -5,13 +5,17 @@ namespace CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			->add('pro');
+			->add('pro', CheckboxType::class, array(
+				'label' => 'Demande de compte Naturaliste',
+				'required' => false,
+			));
     }
 
     public function getParent()

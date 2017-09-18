@@ -79,6 +79,7 @@ a:hover, a:active, a:focus {
 	color: #e6c0aa;
 }
 
+
 /* RESPONSIVE CSS
 ----------------- */
 
@@ -186,5 +187,15 @@ footer {
 
 #monBouton {
 	float: right;
+}
+
+.fa-facebook-official {
+	float: left;
+	color: #bebebe;	
+}
+
+.fa-facebook-official:hover {
+	color: #3b5998;
+	background: #fff;
 }
 
