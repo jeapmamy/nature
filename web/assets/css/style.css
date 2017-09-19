@@ -1,6 +1,6 @@
 body, html{
 	height: 100%;
-	color: #e6c0aa;
+	color: #caab9a;
 }
 header {
 	margin-bottom: 50px;
@@ -13,16 +13,16 @@ header {
 }
 
 h1 {
-	color: #caab9a;
+	color: #8a7569;
 }
 
 h2 {
 	text-align: center;
-	color: #dbb7a3;
+	color: #b09587;
 }
 
 p {
-	color: #e6c0aa;
+	color: #caab9a;
 }
 
 a {
@@ -71,12 +71,12 @@ a:hover, a:active, a:focus {
 }
 .marketing h2 {
   	font-weight: normal;
-	color: #dbb7a3;
+	color: #b09587;
 }
 .marketing .col-lg-4 p {
 	margin-right: .75rem;
 	margin-left: .75rem;
-	color: #e6c0aa;
+	color: #caab9a;
 }
 
 

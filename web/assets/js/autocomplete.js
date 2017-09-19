@@ -58,13 +58,16 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 
         var image = 'http://localhost/nature/web/assets/img/markeur/crow2.png';
         $.each(response, function(ix, obs) {
+            var date = new Date(obs['date'].date);
+            var dateString = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
             console.log(obs);
+
             var marker = new google.maps.Marker({
                 position: {
                     lat: obs.latitude*1,
                     lng: obs.longitude*1
                 },
-                title: "Vu le " + obs['date'].date,
+                title: "Vu le " + dateString,
                 icon: image,
                 map: self.map
             });

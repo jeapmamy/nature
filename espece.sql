@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 24 Août 2017 à 12:06
+-- Généré le :  Mar 19 Septembre 2017 à 13:49
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -40,7 +40,7 @@ CREATE TABLE `espece` (
   `HABITAT` varchar(1) DEFAULT NULL,
   `FR` varchar(1) DEFAULT NULL,
   `URL` varchar(42) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `espece`

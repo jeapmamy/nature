@@ -16,11 +16,12 @@
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="http://localhost/nature/web/assets/js/jquery-ui/jquery-ui.css">
+	<!--<link rel="stylesheet" href="http://localhost/nature/web/assets/js/jquery-ui/jquery-ui.css">-->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	
 	{# On charge le CSS de bootstrap depuis le site directement #}
-	<link rel="stylesheet" href="http://localhost/nature/web/assets/css/style.css">
-	<link rel="stylesheet" href="http://localhost/nature/web/assets/css/carousel.css">
+	<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/carousel.css')}}">
 	
 	{% endblock %}
 </head>
@@ -37,7 +38,7 @@
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="{{ path('core_index') }}">
-							<img src="http://localhost/nature/web/assets/img/nao_36.png" width=124 height=130 alt="" class="d-inline-block align-top" alt="" style="margin-top: -40px;" id="logo">
+							<img src="{{asset('assets/img/nao_36.png')}}" width=124 height=130 alt="" class="d-inline-block align-top" alt="" style="margin-top: -40px;" id="logo">
 						</a>
 						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars fa-2x"></i>
 						</button>
@@ -91,7 +92,7 @@
 		================================================== -->
 		<footer id="piedBlog">
 			<div class="container">
-				<a href="#" title="Facebook" target="_blank">
+				<a href="https://www.facebook.com/Nos-amis-les-oiseaux-NAO-518677581818385/" title="Facebook" target="_blank">
 					<i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
 				</a>
 				<button class="btn btn-warning" type="button" id="monBouton"><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i></button>
@@ -116,8 +117,8 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-		<script src="http://localhost/nature/web/assets/js/autocomplete.js"></script>
-		<script src="http://localhost/nature/web/assets/js/main.js"></script>
+		<script src="{{asset('assets/js/autocomplete.js')}}"></script>
+		<script src="{{asset('assets/js/main.js')}}"></script>
 
 
 		<!-- Script Map
