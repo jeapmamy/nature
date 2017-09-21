@@ -14,8 +14,9 @@ class ObservationRepository extends EntityRepository
 {
 
 	// Depuis un repository
-	public function mase($id)
+	public function chercheObservation($id)
 	{
+		/*
 		$query = $this->_em->createQuery('SELECT a.date, a.latitude, a.longitude, a.statut, u.id, u.username FROM CoreBundle:Observation a JOIN CoreBundle:User u WHERE a.espece = :id AND a.statut = 1 AND a.user = u.id');
 	 	//$query->andWhere(u.id = a.user_id);
 		$query->setParameter('id', $id);
@@ -23,6 +24,24 @@ class ObservationRepository extends EntityRepository
 		$results = $query->getArrayResult();
 
 		return $results;
+		*/
+		$qb = $this
+		   ->createQueryBuilder('o')
+		;  
+
+		$qb->where('o.espece = :id')
+			->setParameter('id', $id)
+			->leftJoin('o.user', 'user')
+			->addSelect('user')
+			->leftJoin('o.image', 'image')
+			->addSelect('image')
+			->AndWhere('o.statut = 1')
+		;
+
+		return $qb
+			->getQuery()
+			->getArrayResult()
+		;
 	}
 	
 	public function myFindBy()

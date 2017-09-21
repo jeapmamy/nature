@@ -72,7 +72,7 @@ class FrontController extends Controller
         if($request->isXmlHttpRequest())
         {
             $em = $this->getDoctrine()->getManager(); 
-            $listeObservation = $em->getRepository('CoreBundle:Observation')->mase($id);
+            $listeObservation = $em->getRepository('CoreBundle:Observation')->chercheObservation($id);
             $response = new Response(json_encode($listeObservation));
             $response -> headers -> set('Content-Type', 'application/json');
             return $response;      

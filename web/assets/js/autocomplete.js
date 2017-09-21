@@ -47,14 +47,20 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
         document.getElementById('div2').style.display = 'block';
 
         for (var i = 0; i < response.length; i++) {
-                var ligne = $("<tr></tr>"); 
-                var date = new Date(response[i]['date'].date);
-				var dateString = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+			var ligne = $("<tr></tr>"); 
+			var date = new Date(response[i]['date'].date);
+			var dateString = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
 
-                ligne.append($("<td>" + dateString + "</td>"));
-                ligne.append($("<td>" + response[i].username + "</td>"));
-                $("#ob").append(ligne);
-        }
+			ligne.append($("<td>" + dateString + "</td>"));
+			ligne.append($("<td>" + response[i].user.username + "</td>"));
+				if (response[i].image) {
+					ligne.append($("<td>" + response[i].image.alt + "</td>"));
+				}
+				else {
+					ligne.append($("<td>" + 'Aucune image pour cette observation' + "</td>"));
+				}
+			$("#ob").append(ligne);
+		}
 
         var image = 'http://localhost/nature/web/assets/img/markeur/crow2.png';
         $.each(response, function(ix, obs) {
