@@ -73,6 +73,7 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
             });
             self.markers.push(marker);
         });
+		var markerCluster = new MarkerClusterer(self.map, self.markers, {imagePath: 'http://localhost/nature/web/assets/img/markeur/m'});
     })
 
     $.get('http://localhost/nature/web/app_dev.php/rechercher/' + id, function(response){

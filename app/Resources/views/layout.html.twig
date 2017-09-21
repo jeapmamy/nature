@@ -34,7 +34,7 @@
 			<!-- Navigation
 			================================================== -->
 			<!-- Image and text -->
-			<nav class="navbar navbar-light bg-light" style="background-color: #fcfcfc;">
+			<nav class="navbar navbar-light bg-light">
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="{{ path('core_index') }}">
@@ -46,16 +46,25 @@
 					
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
-						  <li class="nav-item">
+							<li class="nav-item">
 								<a class="nav-link" href="{{ path('core_index') }}"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_searchEspece') }}"><i class="fa fa-search" aria-hidden="true"></i> Espèces</a></li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_observation') }}"><i class="fa fa-eye" aria-hidden="true"></i> Observation</a></li>
 							<li class="nav-item"><a class="nav-link" href="https://nosamislesoiseauxblog.wordpress.com/"><i class="fa fa-comment" aria-hidden="true"></i> Blog</a></li>
 							<li class="nav-item"><a class="nav-link" href="{{ path('core_association') }}"><i class="fa fa-users" aria-hidden="true"></i> Association</a></li>
+						</ul>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item">
 								{% if is_granted('ROLE_ADMIN') %}
 									<a class="nav-link" href="{{ path('core_admin') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Gestion</a>
+								{% endif %}
+							</li>
+							<li class="nav-item">
+								{% if is_granted('ROLE_USER') %}
+									<a class="nav-link" href="{{ path('fos_user_profile_edit') }}" title="Modifier mon profil"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a>
 								{% endif %}
 							</li>
 							<li class="nav-item">
@@ -65,13 +74,8 @@
 									<a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
 								{% endif %}
 							</li>
-							<li class="nav-item">
-								{% if is_granted('ROLE_USER') %}
-									<a class="nav-link" href="{{ path('fos_user_profile_edit') }}" title="Modifier mon profil"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a>
-								{% endif %}
-							</li>
 						</ul>
-					  </div>
+					</div>
 				</div>
             </nav>
 		</header>
@@ -119,6 +123,7 @@
 	
 		<script src="{{asset('assets/js/autocomplete.js')}}"></script>
 		<script src="{{asset('assets/js/main.js')}}"></script>
+		<script src="{{asset('assets/js/markerclusterer.js')}}"></script>
 
 
 		<!-- Script Map

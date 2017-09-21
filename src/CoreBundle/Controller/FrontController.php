@@ -120,10 +120,10 @@ class FrontController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			
 			if ($this->isGranted('ROLE_ADMIN')) {
-				$observation->setStatut(1);
+				$observation->setStatut(true);
 			} 
 			else {
-				$observation->setStatut(0);
+				$observation->setStatut(false);
 			}
 			
 			$observation->setUser($user);
@@ -132,10 +132,10 @@ class FrontController extends Controller
 			$em->persist($observation);
 			$em->flush($observation);
 			
-			if ($observation->getStatut() === 1) {
+			if ($observation->getStatut() === true) {
 				$this->addFlash('success', 'Votre observation a bien été enregistrée.');
 			} 
-			elseif ($observation->getStatut() === 0){
+			elseif ($observation->getStatut() === false){
 				$this->addFlash('info', 'Votre observation a été enregistrée, elle est en attente de validation.');
 			}
 			

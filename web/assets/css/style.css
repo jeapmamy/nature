@@ -1,13 +1,18 @@
 body, html{
 	height: 100%;
 	color: #caab9a;
+	background-color: #fcfcfc;
 }
+
 header {
 	margin-bottom: 50px;
 }
+
 .navbar-light {
 	border-bottom: solid #ffaf0c 10px;
+	background-color: #fcfcfc;
 }
+
 #global {
 	background-color: #f1f1f1;
 }
@@ -16,7 +21,10 @@ h1 {
 	color: #8a7569;
 }
 
-h2 {
+h2,
+h3,
+h4
+{
 	text-align: center;
 	color: #b09587;
 }
@@ -36,11 +44,11 @@ a:link {
 a:hover, a:active, a:focus {
 	color: #ffaf0c;
 }
-
+/*
 .nav {
 	height: 110px;
 }
-
+*/
 .nav-link {
 	font-size: 16px;
 }
@@ -88,13 +96,14 @@ a:hover, a:active, a:focus {
 /* RESPONSIVE CSS
 ----------------- */
 
-@media screen and (max-width: 991px) {
-	#logo {
-		display: none;
+@media screen and (max-width: 767px) {
+	img#logo {
+		width: 87px;
+		height: 91px;
 	}
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 639px) {
 	#monCarousel {
 		display: none;
 	}

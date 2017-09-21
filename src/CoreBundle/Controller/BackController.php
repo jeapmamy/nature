@@ -48,7 +48,7 @@ class BackController extends Controller
 			->getRepository('CoreBundle:Observation')
 			->find($id); 
 		
-        $observation->setStatut(1);
+        $observation->setStatut(true);
 		
         $em->persist($observation); 
         $em->flush(); 
@@ -90,13 +90,31 @@ class BackController extends Controller
 			->getRepository('CoreBundle:User')
 			->find($id); 
 		
-        $user->setPro(0);
+        $user->setPro(false);
 		$user->setRoles(['ROLE_ADMIN']);
 		
         $em->persist($user); 
         $em->flush(); 
 		
+		// Envoi d'un email
+		$email = $user->getEmail();
+	
+		$message = (new \Swift_Message())
+			->setSubject('Confirmation de votre nouveau statut')
+			->setFrom(['contact.nao2017@gmail.com' => 'Association NAO'])
+			->setTo($email)
+			->setBody($this->renderView(
+				'Emails/mail.html.twig', array(
+					'user' => $user,)
+				),
+				'text/html'
+			)
+		;
+
+		$this->get('mailer')->send($message);
+		
         $this->addFlash('success', 'Le membre a maintenant le statut "Naturaliste".');
+		$this->addFlash('success', 'Une confirmation, par email, vient de lui être envoyée.');
 		
         return $this->redirectToRoute('core_admin'); 
     }
@@ -113,7 +131,7 @@ class BackController extends Controller
 			->getRepository('CoreBundle:User')
 			->find($id); 
 		
-		$user->setPro(0);
+		$user->setPro(false);
 		
         $em->persist($user); 
         $em->flush(); 
