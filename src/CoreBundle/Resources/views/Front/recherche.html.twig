@@ -6,7 +6,6 @@
 	Faire une recherche - {{ parent() }}
 {% endblock %}
 
-
 {% block titlepage %}
 <h1 style="text-align: center;">Faire une recherche</h1>
 <style>
@@ -18,15 +17,17 @@
 {% endblock %}
 
 
-{% block core_body %}
+{% block core_body %}			
+		
 <div class="well">
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>Recherche</span>
+				<span>Quel oiseau ?</span>
 			</div>
 			<div class="corps">
-				{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+				<form action="POST" onsubmit="return false;">
+					{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
 					{{ form_widget(form.nomVern, {
 						'attr': {
@@ -35,112 +36,26 @@
 							}
 						})
 					}}
-				{{ form_end(form) }}
+					<br />
+					
+					{{ form_end(form) }}
+				
+					<br />
+					<button class="btn btn-success" id="formlist">Liste des observations</button>
+					
+				</form>
+				
 			</div>
 		</div>
 	</div>
-	<br />
-
-
-	<div class="row">
-		<div class="col-lg-10 col-lg-offset-1">
-			<div class="sub-title">
-				<span>Fiche de l'espèce</span>
-			</div>
-
-			<div class="corps">
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Nom latin de l'espèce</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="lbnom"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Auteur</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="lbauteur"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Nom vernaculaire (FR)</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="lbnomvern"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Nom vernaculaire (ENG)</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="nomVernEng"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Famille</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="famille"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Phylum</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="phylum"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Classe</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="classe"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Ordre</p>
-					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="ordre"></p>
-				</div>
-				<div class="row">
-					<p class="col-lg-5 col-lg-offset-1">Lien fiche INPN</p>
-					<p class="col-lg-5 col-lg-offset-1" id=""><a id = 'url' href= "" target="_blank"></a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<br />
-
-	<div class="row" style="">
-		<div class="col-lg-10 col-lg-offset-1">
-			<div class="sub-title">
-				<span>Carte</span>
-			</div>
-
-			<div class="col-lg-12" id="map" style="">
-
-			</div>
-			<br />
-		</div>
-	</div>
-	<br />
-	 
-    
-	<div class="row" id="div2" style="display:none;">
-		<div class="col-lg-10 col-lg-offset-1">
-			<div class="table-style2">
-				<div class="sub-title">
-					<span>Les observations de l'espèce</span>
-				</div>
-				<div class="table-responsive mtb">
-					<table class="table table-bordered table-2 table-striped">
-						<thead>
-							<tr>
-								<th>Date</th>
-								<th>Auteur</th>
-								<th>Image</th>
-							</tr>
-						</thead>
-						<tbody id='ob'>
-
-						</tbody>
-					</table>
-				</div>
-		  	</div>
-		</div>
-	</div>
-	<br />
 </div>
 
-<script>
-	var self = this;
-	function initMap(){
-		self.map = new google.maps.Map($('#map')[0], {
-		center: new google.maps.LatLng(46.606111,1.845278),
-		zoom: 5,
-		});
 
-	}
-</script>
+
+
+<br /><hr>
 
 {% endblock %}
+
+
 

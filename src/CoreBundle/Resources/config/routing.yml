@@ -12,10 +12,6 @@ core_searchEspece:
     path:     /recherche
     defaults: { _controller: CoreBundle:Front:searchEspece }
 
-core_searchFicheEspece:
-    path:     /rechercher/{id}
-    defaults: { _controller: CoreBundle:Front:searchFicheEspece }
-
 core_searchObservation:
     path:     /obs/{id}
     defaults: { _controller: CoreBundle:Front:searchObservation }
@@ -23,6 +19,10 @@ core_searchObservation:
 core_observation:
     path:     /observation
     defaults: { _controller: CoreBundle:Front:observation }
+
+core_liste:
+    path:     /liste/{id}
+    defaults: {_controller: CoreBundle:Front:liste }
 
 core_saisie:
     path:     /saisie/{id}

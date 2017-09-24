@@ -50,20 +50,7 @@ class FrontController extends Controller
         }
     }
 
-//Permet de récupérer la fiche de l'espèce par ID
-    public function searchFicheEspeceAction(Request $request, $id)
-    {   
-        $Espece = new Espece();
-        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
-        if($request->isXmlHttpRequest())
-        {
-            $em = $this->getDoctrine()->getManager(); 
-            $searchFicheEspece = $em->getRepository('CoreBundle:Espece')->searchBird($id); 
-            $response = new Response(json_encode($searchFicheEspece));
-            $response -> headers -> set('Content-Type', 'application/json');
-            return $response;      
-        }
-    }
+
 //searchObservation
     public function searchObservationAction(Request $request, $id)
     {   
@@ -75,7 +62,7 @@ class FrontController extends Controller
             $listeObservation = $em->getRepository('CoreBundle:Observation')->chercheObservation($id);
             $response = new Response(json_encode($listeObservation));
             $response -> headers -> set('Content-Type', 'application/json');
-            return $response;      
+            return ($response);      
         }
     }
 
@@ -98,6 +85,26 @@ class FrontController extends Controller
            'form' => $form->createView(),
            )
         );
+    }
+	
+//Page Liste des observations
+
+    public function listeAction(Request $request, $id)
+    {	
+		$em = $this->getDoctrine()->getManager();
+   
+		$espece = $em
+			->getRepository('CoreBundle:Espece')
+			->find($id);
+		
+		$listObs = $em
+			->getRepository('CoreBundle:Observation')
+			->chercheListe($id);
+		
+		return $this->render('CoreBundle:Front:liste.html.twig', array(
+			'espece' => $espece,
+			'listObs' => $listObs,
+		));
     }
 	
 //Page Observation

@@ -35,6 +35,10 @@
 				<h2>
 					{{ espece.nomVern }}, {{ espece.lbAuteur }}
 				</h2>
+				<br /><br />
+				<div>Vous avez un doute ? Vérifiez l'espèce à l'aide de sa fiche INPN ! 
+					<a href="{{ espece.url }}" target="_blank">{{ espece.url }}</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -165,7 +169,6 @@
 		var infoWindow = new google.maps.InfoWindow({
 			map: map
 		});
-
 		// Try HTML5 geolocation.
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
@@ -184,20 +187,17 @@
 				});
 				document.getElementById("corebundle_observation_latitude").value = position.coords.latitude;
 				document.getElementById("corebundle_observation_longitude").value = position.coords.longitude;
-
 			}, function() {
 				handleLocationError(true, infoWindow, map.getCenter());
 			});
 		} else {
 			// Browser doesn't support Geolocation
 			handleLocationError(false, infoWindow, map.getCenter());
-
 		}
-
+	
 		google.maps.event.addListener(map, 'click', function(event) {
 			placeMarker(event.latLng);
 		  });
-
 		var marker;
 		function placeMarker(location) {
 		  if(marker){ //on vérifie si le marqueur existe

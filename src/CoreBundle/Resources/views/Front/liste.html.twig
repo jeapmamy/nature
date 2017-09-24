@@ -1,0 +1,197 @@
+{# src/CoreBundle/Resources/views/Front/liste.html.twig #}
+
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}
+	Liste des observations - {{ parent() }}
+{% endblock %}
+
+{% block titlepage %}
+<h1 style="text-align: center;">Liste des observations</h1>
+<style>
+	#map {
+		height: 300px;
+		width: 100%;
+	}
+</style>
+{% endblock %}
+
+
+{% block core_body %}			
+		
+
+<div class="well">
+	<div class="row" style="">	
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>L'Oiseau</span>
+			</div>
+
+			<div class="corps">
+				<h2>
+					{{ espece.nomVern }}, {{ espece.lbAuteur }}
+				</h2>
+			</div>
+		</div>
+	</div>
+	<br />
+		<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>Fiche de l'espèce</span>
+			</div>
+
+			<div class="corps">
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Nom latin de l'espèce</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="lbnom">{{ espece.lbNom }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Auteur</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="lbauteur">{{ espece.lbAuteur }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Nom vernaculaire (FR)</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="lbnomvern">{{ espece.nomVern }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Nom vernaculaire (ENG)</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="nomVernEng">{{ espece.nomVernEng }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Famille</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="famille">{{ espece.famille }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Phylum</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="phylum">{{ espece.phylum }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Classe</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="classe">{{ espece.classe }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Ordre</p>
+					<p class="col-lg-5 col-lg-offset-1 color-reponse" id="ordre">{{ espece.ordre }}</p>
+				</div>
+				<div class="row">
+					<p class="col-lg-5 col-lg-offset-1">Lien fiche INPN</p>
+					<p class="col-lg-5 col-lg-offset-1" id=""><a id = 'url' href= "" target="_blank">{{ espece.url }}</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	
+	<div class="row" style="">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title col-xs-12 col-lg-12">
+				<span class="col-xs-12 col-lg-1">Carte</span>
+				<button id="lecture" class="col-xs-12 col-lg-6 col-lg-offset-2 btn btn-warning">Cliquez pour visualiser les observations sur la carte</button>
+			</div>
+
+			<div class="col-lg-12" id="map" style="">
+
+			</div>
+			<br />
+		</div>
+	</div>
+	<br />
+	 
+	<!-- Affiche la liste des observations en attentes
+	================================================== -->
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div class="sub-title">
+				<span>Liste des observations en attentes de validation</span>
+			</div>
+			<div class="table-style2">
+				<div class="table-responsive mtb">
+					<table class="table table-bordered table-2 table-striped">
+						<thead>
+							<tr>
+								<td class="col-lg-1">Date</td>
+								<td class="col-lg-1">Pseudo</td>
+								<td class="col-lg-1">Latitude</td>
+								<td class="col-lg-1">Longitude</td>
+								<td class="col-lg-4">Espèce</td>
+								<td class="col-lg-2">Image</td>
+							</tr>
+						</thead>
+						<tbody>
+							{% for obs in listObs %}
+							<tr>
+								<td>{{ obs.date|date('d/m/Y') }}</td>
+								<td>{{ obs.user.username }}</td>
+								<td>{{ obs.latitude }}</td>
+								<td>{{ obs.longitude }}</td>
+								<td>{{ obs.espece.nomVern }}, {{ obs.espece.lbAuteur }}</td>
+								<td>
+									{# On vérifie qu'une image soit bien associée à l'article #}
+									{% if obs.image is not null %}
+										<div class="modal fade" id="myModal{{ obs.image.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+														<h4 class="modal-title">{{ obs.espece.nomVern }}, {{ obs.espece.lbNom }}</h4>
+													</div>
+													<div class="modal-body">
+														<div class="container-fluid">
+															<div class="row">
+																<div class="col-lg-12">
+																	<p></p>
+																	<img
+																		src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+																		alt="{{ obs.image.alt }}"
+																		class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+																	/>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<!--<button class="btn btn-primary" type="button"><i class="icon icon-check icon-lg"></i> Valide</button>-->
+														<button class="btn btn-warning" type="button" data-dismiss="modal">Fermer</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<a data-toggle="modal" href="#myModal{{ obs.image.id }}">
+											<img
+												src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+												alt="{{ obs.image.alt }}"
+												title="Cliquez pour agrandir l'image"
+												height=100
+											/>
+										</a>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		 </div>
+	</div>
+	<br />
+</div>
+
+<br /><hr>
+
+<script>
+	
+	var self = this;
+	function initMap(){
+		self.map = new google.maps.Map($('#map')[0], {
+		center: new google.maps.LatLng(46.606111,1.845278),
+		zoom: 5,
+		});
+	}
+	
+</script>
+
+{% endblock %}
+
+

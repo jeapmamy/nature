@@ -44,6 +44,24 @@ class ObservationRepository extends EntityRepository
 		;
 	}
 	
+	public function chercheListe($id)
+	{
+		$qb = $this
+		   ->createQueryBuilder('o')
+		;  
+
+		$qb->where('o.espece = :id')
+			->setParameter('id', $id)
+			->AndWhere('o.statut = 1')
+			->orderBy('o.date', 'DESC')
+		;
+
+		return $qb
+			->getQuery()
+			->getResult()
+		;
+	}
+	
 	public function myFindBy()
 	{
 		

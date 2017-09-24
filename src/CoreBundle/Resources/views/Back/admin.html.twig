@@ -54,13 +54,13 @@
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-															<h4 class="modal-title">Titre de la modale</h4>
+															<h4 class="modal-title">{{ obs.espece.nomVern }}, {{ obs.espece.lbNom }}</h4>
 														</div>
 														<div class="modal-body">
 															<div class="container-fluid">
 																<div class="row">
 																	<div class="col-lg-12">
-																		<p>Corps de la modale</p>
+																		<p></p>
 																		<img
 																			src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
 																			alt="{{ obs.image.alt }}"

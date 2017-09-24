@@ -26,29 +26,22 @@
 				<span>Quel oiseau ?</span>
 			</div>
 			<div class="corps">
-				<form action="POST">
-				{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+				<form action="POST" onsubmit="return false;">
+					{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-				{{ form_widget(form.nomVern, {
-					'attr': {
-						'data-id': 'listedesespeces',
-						'data-url': path('core_autocompletion')
-						}
-					})
-				}}
-				<br />
+					{{ form_widget(form.nomVern, {
+						'attr': {
+							'data-id': 'listedesespeces',
+							'data-url': path('core_autocompletion')
+							}
+						})
+					}}
+					<br />
+					
+					{{ form_end(form) }}
 				
-				<div>Vous avez un doute ? Vérifiez l'espèce à l'aide de sa fiche INPN ! 
-					<a id = 'url' href="" target="_blank"></a>
-				</div>
-				
-				<br />
-				
-				
-				{{ form_end(form) }}
-				
-				
-					<button class="btn btn-primary" id="formobs">Valider</button>
+					<br />
+					<button class="btn btn-primary" id="formobs">Ajouter une observation</button>
 				</form>
 				
 			</div>
