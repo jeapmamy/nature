@@ -7,7 +7,14 @@
 {% endblock %}
 
 {% block titlepage %}
-<h1 style="text-align: center;">Ajouter une observation</h1>
+	<div class="row">
+        <div class="col-xs-12 col-lg-12 picto">
+			<span class="fa fa-search fa-3x"></span>
+		</div>
+		<div class="col-xs-12 col-lg-12">
+			<h1 style="text-align: center;">Ajouter une observation</h1>
+		</div>
+	</div>
 <style>
 	#map {
 		height: 300px;
@@ -28,7 +35,7 @@
 	<div class="row" style="">	
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>L'Oiseau</span>
+				<h2>L'Oiseau</h2>
 			</div>
 
 			<div class="corps">
@@ -46,7 +53,7 @@
 	<div class="row" style="">	
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>Quand ?</span>
+				<h2>Quand ?</h2>
 			</div>
 
 			<div class="corps form-group" id="dateObs">
@@ -63,7 +70,7 @@
 	<div class="row" style="">
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>Où ?</span>
+				<h2>Où ?</h2>
 			</div>
 			
 			<div class="col-lg-6">
@@ -88,7 +95,7 @@
 				<div class="row">
 					<div class="latlng col-lg-5">
 						<div class="sub-title">
-							<span>Latitude : </span>
+							<h2>Latitude : </h2>
 						</div>
 						{{ form_errors(form.latitude) }}
 						<div class="corps form-group">
@@ -103,7 +110,7 @@
 					</div>
 					<div class="latlng col-lg-5 col-lg-offset-2">
 						<div class="sub-title">
-							<span>Longitude : </span>
+							<h2>Longitude : </h2>
 						</div>
 						{{ form_errors(form.longitude) }}
 
@@ -124,7 +131,7 @@
 	<div class="row" style="">		
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>Ajoutez une photo ! </span>
+				<h2>Ajoutez une photo ! </h2>
 			</div>
 			<div class="corps form-group">
 				{{ form_label(form.image, "Image : ", {'label_attr': {'class': 'col-lg-3 control-label'}}) }}
@@ -203,7 +210,7 @@
 		  if(marker){ //on vérifie si le marqueur existe
 			marker.setPosition(location); //on change sa position
 		  }else{
-			var image = 'http://localhost/nature/web/assets/img/markeur/crow2.png';
+			var image = '{{asset('assets/img/markeur/crow2.png')}}';
 			marker = new google.maps.Marker({ //on créé le marqueur
 			  position: location,
 			  map: map,

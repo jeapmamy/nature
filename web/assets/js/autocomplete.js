@@ -44,6 +44,9 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 $("#formobs").click(function(){
 	
 	document.location.href="http://localhost/nature/web/app_dev.php/saisie/" + id ;
+	console.log(document.location.href);
+	console.log(document.location.host);
+	console.log(document.location.hostname);
 	
 	return false;
 	
@@ -54,6 +57,9 @@ $("#formobs").click(function(){
 $("#formlist").click(function(){
 	
 	document.location.href="http://localhost/nature/web/app_dev.php/liste/" + id ;
+	console.log(document.location.href);
+	console.log(document.location.host);
+	console.log(document.location.hostname);
 	
 	return false;
 
@@ -62,11 +68,16 @@ $("#formlist").click(function(){
 
 //Recuperation des observations pour generer les markers
 $('#lecture').on('click', function() {
+	$('#lecture').hide();
 	var urlComplet = document.location.href;
 	console.log(urlComplet);
 	var index = urlComplet.substring(urlComplet.lastIndexOf( "/" )+1 );
 	console.log(index);
 	$.get('http://localhost/nature/web/app_dev.php/obs/' + index, function(response) {
+		
+		console.log(document.location.href);
+		console.log(document.location.host);
+		console.log(document.location.hostname);
 	
 		self.markers = [];
 		

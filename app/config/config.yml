@@ -78,7 +78,7 @@ fos_user:
     user_class: CoreBundle\Entity\User
     from_email:
         address: contact.nao2017@gmail.com
-        sender_name: webmaster
+        sender_name: supportNAO
     registration:
         form:
             type: CoreBundle\Form\RegistrationType

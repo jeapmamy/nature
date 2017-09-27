@@ -1,5 +1,14 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
+{% block title %}
+	Réinitialisation du mot de passe - {{ parent() }}
+{% endblock %}
+
+
+{% block titlepage %}
+	<h1 style="text-align: center;">Réinitialisation du mot de passeé</h1>
+{% endblock %}
+
 {% block fos_user_content %}
 {% include "@FOSUser/Resetting/reset_content.html.twig" %}
 {% endblock fos_user_content %}

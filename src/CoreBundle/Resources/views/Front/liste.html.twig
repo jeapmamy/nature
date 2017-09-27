@@ -7,7 +7,14 @@
 {% endblock %}
 
 {% block titlepage %}
-<h1 style="text-align: center;">Liste des observations</h1>
+	<div class="row">
+        <div class="col-xs-12 col-lg-12 picto">
+			<span class="fa fa-search fa-3x"></span>
+		</div>
+		<div class="col-xs-12 col-lg-12">
+			<h1 style="text-align: center;">Liste des observations</h1>
+		</div>
+	</div>
 <style>
 	#map {
 		height: 300px;
@@ -24,7 +31,7 @@
 	<div class="row" style="">	
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>L'Oiseau</span>
+				<h2>L'Oiseau</h2>
 			</div>
 
 			<div class="corps">
@@ -38,7 +45,7 @@
 		<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>Fiche de l'espèce</span>
+				<h2>Fiche de l'espèce</h2>
 			</div>
 
 			<div class="corps">
@@ -83,100 +90,110 @@
 	</div>
 	<br />
 	
-	<div class="row" style="">
-		<div class="col-lg-10 col-lg-offset-1">
-			<div class="sub-title col-xs-12 col-lg-12">
-				<span class="col-xs-12 col-lg-1">Carte</span>
-				<button id="lecture" class="col-xs-12 col-lg-6 col-lg-offset-2 btn btn-warning">Cliquez pour visualiser les observations sur la carte</button>
+	<!-- Affiche la carte des observations publiées
+	=============================================== -->
+	{% if listObs is not empty %}
+		<div class="row" style="">
+			<div class="col-lg-10 col-lg-offset-1">
+				<div class="sub-title">
+					<h2>Carte</h2>
+				</div>
+				<button id="lecture" class="col-xs-12 col-lg-12 btn btn-warning">Cliquez pour visualiser les observations sur la carte</button>
+				<div class="col-lg-12" id="map" style=""></div>
+				<br />
 			</div>
-
-			<div class="col-lg-12" id="map" style="">
-
-			</div>
-			<br />
 		</div>
-	</div>
+	{% endif %}
 	<br />
 	 
-	<!-- Affiche la liste des observations en attentes
-	================================================== -->
+	<!-- Affiche la liste des observations publiées
+	=============================================== -->
+	
+	
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="sub-title">
-				<span>Liste des observations en attentes de validation</span>
+				<h2>Liste des observations</h2>
 			</div>
-			<div class="table-style2">
-				<div class="table-responsive mtb">
-					<table class="table table-bordered table-2 table-striped">
-						<thead>
-							<tr>
-								<td class="col-lg-1">Date</td>
-								<td class="col-lg-1">Pseudo</td>
-								<td class="col-lg-1">Latitude</td>
-								<td class="col-lg-1">Longitude</td>
-								<td class="col-lg-4">Espèce</td>
-								<td class="col-lg-2">Image</td>
-							</tr>
-						</thead>
-						<tbody>
-							{% for obs in listObs %}
-							<tr>
-								<td>{{ obs.date|date('d/m/Y') }}</td>
-								<td>{{ obs.user.username }}</td>
-								<td>{{ obs.latitude }}</td>
-								<td>{{ obs.longitude }}</td>
-								<td>{{ obs.espece.nomVern }}, {{ obs.espece.lbAuteur }}</td>
-								<td>
-									{# On vérifie qu'une image soit bien associée à l'article #}
-									{% if obs.image is not null %}
-										<div class="modal fade" id="myModal{{ obs.image.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-											<div class="modal-dialog modal-lg">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-														<h4 class="modal-title">{{ obs.espece.nomVern }}, {{ obs.espece.lbNom }}</h4>
-													</div>
-													<div class="modal-body">
-														<div class="container-fluid">
-															<div class="row">
-																<div class="col-lg-12">
-																	<p></p>
-																	<img
-																		src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
-																		alt="{{ obs.image.alt }}"
-																		class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-																	/>
+			{% if listObs is empty %}
+				<br />
+				<h3 style="text-align: center;">Il n’y a pas d’observation enregistrée pour cet oiseau</h3>
+			{% endif %}
+			{% if listObs is not empty %}
+				<div class="table-style2">
+					<div class="table-responsive mtb">
+						<table class="table table-bordered table-2 table-striped">
+							<thead>
+								<tr>
+									<td class="col-lg-1">Date</td>
+									<td class="col-lg-1">Pseudo</td>
+									<td class="col-lg-1">Latitude</td>
+									<td class="col-lg-1">Longitude</td>
+									<td class="col-lg-4">Espèce</td>
+									<td class="col-lg-2">Image</td>
+								</tr>
+							</thead>
+							<tbody>
+								{% for obs in listObs %}
+									<tr>
+										<td>{{ obs.date|date('d/m/Y') }}</td>
+										<td>{{ obs.user.username }}</td>
+										<td>{{ obs.latitude }}</td>
+										<td>{{ obs.longitude }}</td>
+										<td>{{ obs.espece.nomVern }}, {{ obs.espece.lbAuteur }}</td>
+										<td>
+											{# On vérifie qu'une image soit bien associée à l'article #}
+											{% if obs.image is not null %}
+												<div class="modal fade" id="myModal{{ obs.image.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-lg">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
+																<h3 class="modal-title">{{ obs.espece.nomVern }}, {{ obs.espece.lbNom }}</h3>
+															</div>
+															<div class="modal-body">
+																<div class="container-fluid">
+																	<div class="row">
+																		<div class="col-lg-12">
+																			<p></p>
+																			<img
+																				src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+																				alt="{{ obs.image.alt }}"
+																				class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+																			/>
+																		</div>
+																	</div>
 																</div>
+															</div>
+															<div class="modal-footer">
+																<!--<button class="btn btn-primary" type="button"><i class="icon icon-check icon-lg"></i> Valide</button>-->
+																<button class="btn btn-warning" type="button" data-dismiss="modal">Fermer</button>
 															</div>
 														</div>
 													</div>
-													<div class="modal-footer">
-														<!--<button class="btn btn-primary" type="button"><i class="icon icon-check icon-lg"></i> Valide</button>-->
-														<button class="btn btn-warning" type="button" data-dismiss="modal">Fermer</button>
-													</div>
 												</div>
-											</div>
-										</div>
-										<a data-toggle="modal" href="#myModal{{ obs.image.id }}">
-											<img
-												src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
-												alt="{{ obs.image.alt }}"
-												title="Cliquez pour agrandir l'image"
-												height=100
-											/>
-										</a>
-									{% endif %}
-								</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+												<a data-toggle="modal" href="#myModal{{ obs.image.id }}">
+													<img
+														src="{{ asset(obs.image.uploadDir ~ '/' ~ obs.image.id ~ '.' ~ obs.image.url) }}"
+														alt="{{ obs.image.alt }}"
+														title="Cliquez pour agrandir l'image"
+														height=100
+													/>
+												</a>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-		 </div>
+			{% endif %}
+		</div>
 	</div>
-	<br />
+<br />
 </div>
+	
 
 <br /><hr>
 

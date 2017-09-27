@@ -17,6 +17,10 @@ header {
 	background-color: #f1f1f1;
 }
 
+.fa {
+	color: #8a7569;
+}
+
 h1 {
 	color: #8a7569;
 }
@@ -61,6 +65,24 @@ a:hover, a:active, a:focus {
 	color: #005b89;
 }
 
+input,
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=textarea]
+{
+	box-shadow: 2px 2px 2px #d9d9d9;
+}
+
+.btn {
+	background: #e6c0aa;
+	border: #e6c0aa;
+	box-shadow: 2px 2px 2px #d9d9d9;
+}
+
+.picto {
+	text-align: center;
+}
 
 
 /* CONTAINER FOSUSER
@@ -85,8 +107,10 @@ a:hover, a:active, a:focus {
 .marketing h2 {
   	font-weight: normal;
 	color: #b09587;
+	margin: 30px 0 30px 0;
 }
 .marketing .col-lg-4 p {
+	margin: 30px 0 30px 0;
 	margin-right: .75rem;
 	margin-left: .75rem;
 	color: #caab9a;
@@ -114,9 +138,8 @@ a:hover, a:active, a:focus {
 
 .sub-title {
 	padding: 10px 10px 10px 10px;
-	font-size: 1.4em;
-	background: #e8e5e5;
-	color: #dbb7a3;
+	//background: #e8e5e5;
+	color: #b09587;
 	border-bottom: solid #ccc 1px;
 }
 
@@ -190,13 +213,15 @@ a:hover, a:active, a:focus {
  -------- */
 
 footer {
-	background: #e8e5e5;
+	background: #d9d9d9;
+	color: #8a7569;
 	bottom: 0;
 	width: 100%;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	/*height: 50px;*/
 	text-align: center;
+	bottom: 0px;
 }
 
 #monBouton {
