@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactType extends AbstractType
 {
@@ -18,10 +19,29 @@ class ContactType extends AbstractType
 			
             ->add('nom', TextType::class, array(
 				'label' => false,
+				'required'	=> true,
+				'constraints' => array(
+                    new NotBlank(array("message" => "Veuillez remplir ce champ")),
+				)
 			))
-            ->add('prenom', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('message', TextareaType::class)
+            ->add('prenom', TextType::class, array(
+				'required'	=> true,
+				'constraints' => array(
+                    new NotBlank(array("message" => "Veuillez remplir ce champ")),
+				)
+			))
+            ->add('email', EmailType::class, array(
+				'required'	=> true,
+				'constraints' => array(
+                    new NotBlank(array("message" => "Veuillez remplir ce champ")),
+				)
+			))
+            ->add('message', TextareaType::class, array(
+				'required'	=> true,
+				'constraints' => array(
+                    new NotBlank(array("message" => "Veuillez remplir ce champ")),
+				)
+			))
 			->add('envoyer', SubmitType::class)
         ;
     }
