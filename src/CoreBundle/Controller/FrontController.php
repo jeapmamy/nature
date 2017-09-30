@@ -74,12 +74,6 @@ class FrontController extends Controller
     {
         $Espece = new Espece();
         $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
-		
-		if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-			
-			return $this->redirectToRoute('core_obssaisie', array('id' => id));
-		}
-		
         return $this->render('CoreBundle:Front:observation.html.twig',
             array(
            'form' => $form->createView(),
