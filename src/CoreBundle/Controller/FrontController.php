@@ -24,7 +24,7 @@ class FrontController extends Controller
         return $this->render('CoreBundle:Front:index.html.twig');
     }
 
-//Page recherche
+//Recherche - Etape 1 Sélection de l'oiseau pour voir les observations
     public function searchEspeceAction(Request $request)
     {
         $Espece = new Espece();
@@ -36,7 +36,7 @@ class FrontController extends Controller
         );
     }
 
-//Permet de  la liste des espèces pour l'autocomplétion 
+//Permet d'afficher la liste des espèces pour l'autocomplétion 
     public function autocompletionAction(Request $request)
     {   
         if($request->isXmlHttpRequest())
@@ -51,7 +51,7 @@ class FrontController extends Controller
     }
 
 
-//searchObservation
+//Recherche -  Etape 2 Récupération des observations pour une espèce donnée 
     public function searchObservationAction(Request $request, $id)
     {   
         $Espece = new Espece();
@@ -66,22 +66,8 @@ class FrontController extends Controller
         }
     }
 
-//Page recherche pour observation
-	/**
-     *@Security("has_role('ROLE_USER')")
-     */
-    public function observationAction(Request $request)
-    {
-        $Espece = new Espece();
-        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
-        return $this->render('CoreBundle:Front:observation.html.twig',
-            array(
-           'form' => $form->createView(),
-           )
-        );
-    }
 	
-//Page Liste des observations
+//Recherche - Etape 3 Affichage de la fiche signalétique, carte et liste
 
     public function listeAction(Request $request, $id)
     {	
@@ -100,8 +86,25 @@ class FrontController extends Controller
 			'listObs' => $listObs,
 		));
     }
+
+
+//Observation - Etape 1 Sélection de l'oiseau pour ajouter une observation
+	/**
+     *@Security("has_role('ROLE_USER')")
+     */
+    public function observationAction(Request $request)
+    {
+        $Espece = new Espece();
+        $form = $this->get('form.factory')->create(EspeceType::class, $Espece);
+        return $this->render('CoreBundle:Front:observation.html.twig',
+            array(
+           'form' => $form->createView(),
+           )
+        );
+    }
+
 	
-//Page Observation
+//Observation - Etape 2 Saisie de l'observation
 	/**
      *@Security("has_role('ROLE_USER')")
      */
@@ -128,7 +131,6 @@ class FrontController extends Controller
 			}
 			
 			$observation->setUser($user);
-			//$RecupEspece = $em->getRepository('CoreBundle:Espece')->find($id); 
 			$observation->setEspece($espece);
 			$em->persist($observation);
 			$em->flush($observation);
@@ -150,19 +152,19 @@ class FrontController extends Controller
     }
 	
 	
-	//Page Association
+//Page Association
     public function associationAction()
     {
         return $this->render('CoreBundle:Front:association.html.twig');
     }
 	
-	//Page Mentions-Légales
+//Page Mentions-Légales
     public function mentionsLegalesAction()
     {
         return $this->render('CoreBundle:Front:mentions_legales.html.twig');
     }
 	
-	//Page Contact
+//Page Contact
     public function contactAction(Request $request)
     {
 		$form = $this->createForm(ContactType::class);

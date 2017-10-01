@@ -39,7 +39,7 @@ class EspeceRepository extends EntityRepository
          ->getScalarResult();
        return $select;
     }
-	
+	/*
 	public function getEspeceWithObservation()
 	{
 		$qb = $this
@@ -53,4 +53,5 @@ class EspeceRepository extends EntityRepository
 			->getResult()
 		;
 	}
+	*/
 }

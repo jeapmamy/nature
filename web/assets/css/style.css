@@ -21,6 +21,13 @@ header {
 	color: #8a7569;
 }
 
+.fa-check-square-o:hover,
+.fa-trash:hover,
+.fa-ban:hover
+{
+	color: #ffaf0c;
+}
+
 h1 {
 	color: #8a7569;
 }
@@ -52,11 +59,7 @@ a:link {
 a:hover, a:active, a:focus {
 	color: #ffaf0c;
 }
-/*
-.nav {
-	height: 110px;
-}
-*/
+
 .nav-link {
 	font-size: 16px;
 }

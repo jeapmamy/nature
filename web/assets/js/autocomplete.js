@@ -1,5 +1,6 @@
 var self = this; //Sauvegarde le contexte global
 
+//Autocomplete - génération des propositions suivant les caractères saisis
 $("input[data-id=listedesespeces]").autocomplete({
     source: function (request, response) {
         var oiseau = $("input[data-id=listedesespeces]").val();
@@ -27,6 +28,7 @@ $("input[data-id=listedesespeces]").autocomplete({
 })
 
 
+//Affichage et récupération de la valeur sélectionnée
 $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) {
   
 	event.preventDefault();
@@ -44,29 +46,23 @@ $("input[data-id=listedesespeces]").on('autocompleteselect',function(event, ui) 
 $("#formobs").click(function(){
 	
 	document.location.href="http://localhost/nature/web/app_dev.php/saisie/" + id ;
-	console.log(document.location.href);
-	console.log(document.location.host);
-	console.log(document.location.hostname);
 	
 	return false;
 	
 });
 
 
-//Redirection vers la page de recherche d'un oiseau
+//Redirection vers la page de la liste des observation pour une espece donnée
 $("#formlist").click(function(){
 	
 	document.location.href="http://localhost/nature/web/app_dev.php/liste/" + id ;
-	console.log(document.location.href);
-	console.log(document.location.host);
-	console.log(document.location.hostname);
 	
 	return false;
 
 });
 
 
-//Recuperation des observations pour generer les markers
+//Affichage des markers pour la carte au click
 $('#lecture').on('click', function() {
 	$('#lecture').hide();
 	var urlComplet = document.location.href;
@@ -74,10 +70,6 @@ $('#lecture').on('click', function() {
 	var index = urlComplet.substring(urlComplet.lastIndexOf( "/" )+1 );
 	console.log(index);
 	$.get('http://localhost/nature/web/app_dev.php/obs/' + index, function(response) {
-		
-		console.log(document.location.href);
-		console.log(document.location.host);
-		console.log(document.location.hostname);
 	
 		self.markers = [];
 		
